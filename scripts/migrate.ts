@@ -1,2 +1,7 @@
-import {migrate,database} from '../src/lib/store';
-await migrate();await database().end();console.log('Database schema and default rules are ready.');
+import { migrate, database } from "../src/lib/store";
+try {
+  await migrate();
+  console.log("Database schema and default rules are ready.");
+} finally {
+  if (process.env.DATABASE_URL) await database().end();
+}
