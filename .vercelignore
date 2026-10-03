@@ -1,0 +1,11 @@
+# Upload only the files needed to install and build the application.
+/*
+!src
+!public
+!package.json
+!package-lock.json
+!tsconfig.json
+!next-env.d.ts
+!next.config.ts
+!vercel.json
+!deployment.config.json
