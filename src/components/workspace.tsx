@@ -39,9 +39,11 @@ import type {
   TransactionInput,
 } from "@/lib/domain";
 import type { summary, profiles } from "@/lib/service";
+import { investigationBrief, type impactSummary } from "@/lib/impact";
 type Profile = ReturnType<typeof profiles>[number];
 type WorkspaceData = State & {
   summary: ReturnType<typeof summary>;
+  impact: ReturnType<typeof impactSummary>;
   storage_mode: string;
   profiles: Record<"users" | "devices" | "recipients" | "agents", Profile[]>;
 };
@@ -72,6 +74,7 @@ const links = [
   ["rules", "Rules", SlidersHorizontal],
   ["simulator", "Simulator", FlaskConical],
   ["profiles", "Entity history", Users],
+  ["impact", "Impact & validation", ShieldCheck],
   ["audit", "Audit log", History],
 ] as const;
 async function api<T>(
@@ -299,7 +302,7 @@ export function Workspace() {
         <div className="sidebar-bottom">
           <div className="engine-state">
             <span className="status-dot" />
-            Rule engine <strong>Phase 1</strong>
+            Rules + anomaly model <strong>Review</strong>
           </div>
           <p>
             Transparent decisions.
@@ -352,11 +355,13 @@ export function Workspace() {
                   ? "Monitor transaction risk and focus on the cases that need attention."
                   : section === "simulator"
                     ? "Evaluate a transaction and inspect the evidence behind its decision."
-                    : section === "rules"
-                      ? "Tune deterministic controls. Every change is versioned and audited."
-                      : section === "audit"
-                        ? "A traceable record of analysis, configuration, and analyst actions."
-                        : "Review transaction activity and supporting risk evidence."}
+                    : section === "impact"
+                      ? "Measure review outcomes and customer friction, with explicit evidence limits."
+                      : section === "rules"
+                        ? "Tune deterministic controls. Every change is versioned and audited."
+                        : section === "audit"
+                          ? "A traceable record of analysis, configuration, and analyst actions."
+                          : "Review transaction activity and supporting risk evidence."}
               </p>
             </div>
             <div className="heading-actions">
@@ -420,13 +425,15 @@ export function Workspace() {
             <Rules rules={data.rules} reload={load} />
           ) : section === "audit" ? (
             <AuditList data={data} />
+          ) : section === "impact" ? (
+            <Impact data={data} />
           ) : section === "profiles" ? (
             <Profiles data={data} />
           ) : (
             <Empty text="This page does not exist." />
           )}
           <footer>
-            Rule-based screening · Phase 1 prototype{" "}
+            Rules + learned behavior · Analyst review prototype{" "}
             <span>
               Decisions are recommendations; no funds are moved or frozen.
             </span>
@@ -989,6 +996,9 @@ function CaseList({ data, alerts }: { data: WorkspaceData; alerts: boolean }) {
                         title={t.triggered_rules.map((r) => r.name).join(", ")}
                       >
                         {t.triggered_rules.length} triggered
+                        {t.anomaly?.review_recommended && (
+                          <small>Behavior anomaly</small>
+                        )}
                       </span>
                     </td>
                     <td>
@@ -1010,8 +1020,123 @@ function CaseList({ data, alerts }: { data: WorkspaceData; alerts: boolean }) {
     </Panel>
   );
 }
+function Impact({ data }: { data: WorkspaceData }) {
+  const m = data.impact;
+  const percent = (value: number | null) =>
+    value === null ? "Awaiting labels" : `${(value * 100).toFixed(1)}%`;
+  return (
+    <>
+      <div className="metrics impact-metrics">
+        {[
+          [
+            "Reviewed alert precision",
+            percent(m.reviewed_alert_precision),
+            `${m.confirmed_fraud} confirmed / ${m.reviewed} labeled alerts`,
+          ],
+          [
+            "Review coverage",
+            percent(m.review_coverage),
+            `${m.reviewed} labeled / ${m.queued} queued`,
+          ],
+          [
+            "False-positive reviews",
+            String(m.false_positive),
+            "Legitimate activity among reviewed alerts",
+          ],
+          [
+            "Confirmed fraud exposure",
+            money(m.confirmed_fraud_exposure_bdt),
+            "Reviewed transaction value; not prevented loss",
+          ],
+          [
+            "Median first review",
+            m.median_first_review_seconds === null
+              ? "Awaiting reviews"
+              : `${(m.median_first_review_seconds / 60).toFixed(1)} min`,
+            `${m.first_review_sample_size} cases with a recorded review`,
+          ],
+        ].map(([title, value, caption]) => (
+          <div className="metric" key={title}>
+            <span>{title}</span>
+            <strong>{value}</strong>
+            <small>{caption}</small>
+          </div>
+        ))}
+      </div>
+      <Panel title="Behavior detection beyond rules">
+        <div className="investigation-brief">
+          <h3>{m.anomaly_only_cases} model-only investigations</h3>
+          <p>
+            These transactions passed the rule policy but their learned behavior
+            model recommended analyst review. Review outcomes determine whether
+            that additional workload is useful.
+          </p>
+          <p>
+            New accounts need 20 earlier transactions of the same type. The
+            model abstains when there is too little history or no variation.
+          </p>
+        </div>
+      </Panel>
+      <Panel title="Channel review comparison">
+        <div className="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Channel</th>
+                <th>Screened</th>
+                <th>Queued for review</th>
+                <th>Queue rate</th>
+                <th>Labeled</th>
+              </tr>
+            </thead>
+            <tbody>
+              {m.channels.map((c) => (
+                <tr key={c.channel}>
+                  <td>{c.channel}</td>
+                  <td>{c.screened}</td>
+                  <td>{c.queued}</td>
+                  <td>
+                    {c.screened
+                      ? percent(c.queued / c.screened)
+                      : "No observations"}
+                  </td>
+                  <td>{c.reviewed}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="panel-note">
+          Descriptive channel rates help spot uneven friction. Different sample
+          sizes and risk mix prevent treating this table as a fairness
+          certification.
+        </p>
+      </Panel>
+      <Panel title="What the evidence can establish">
+        <div className="investigation-brief">
+          <p>
+            Metrics use the latest explicit fraud or false-positive review, even
+            when a case is later closed. Unreviewed cases are not ground truth.
+          </p>
+          <p>
+            Alert reviews are a selected sample. Recall, population
+            false-positive rate, prevented losses, and time saved cannot be
+            established from this workspace alone.
+          </p>
+          <p>
+            Validation plan: compare rules with rules plus anomaly review on an
+            untouched synthetic test set, then measure review time and customer
+            friction in a governed shadow-mode pilot. No production upay data or
+            live wallet actions are used in this prototype.
+          </p>
+        </div>
+      </Panel>
+    </>
+  );
+}
 function Evidence({ t }: { t: Analysis }) {
   const p = t.payload;
+  const brief = investigationBrief(t);
   return (
     <>
       <div className={`result-banner ${t.risk_level.toLowerCase()}`}>
@@ -1028,7 +1153,9 @@ function Evidence({ t }: { t: Analysis }) {
           <h2>{label(t.decision)}</h2>
           <p>
             {t.decision === "APPROVE"
-              ? "Transaction meets the current approval policy."
+              ? t.anomaly?.review_recommended
+                ? "Rule policy approves; behavior model recommends analyst review."
+                : "Transaction meets the current approval policy."
               : t.decision === "STEP_UP_AUTH"
                 ? "Require additional identity verification before proceeding."
                 : "Reject this transaction and recommend an account freeze."}
@@ -1042,6 +1169,75 @@ function Evidence({ t }: { t: Analysis }) {
           <Badge value={t.risk_level} />
         </div>
       </div>
+      <Panel title="Investigation brief">
+        <div className="investigation-brief">
+          <h3>What happened?</h3>
+          <p>{brief.what_happened}</p>
+          <h3>Why investigate?</h3>
+          <ul>
+            {brief.why_risky.map((reason, i) => (
+              <li key={i}>{reason}</li>
+            ))}
+          </ul>
+          <h3>What should the analyst do next?</h3>
+          <p>{brief.next_action}</p>
+          <small className="muted">{brief.provenance}</small>
+        </div>
+      </Panel>
+      <Panel title="Learned behavior anomaly">
+        <div className="investigation-brief">
+          {t.anomaly ? (
+            <>
+              <p>
+                <strong>
+                  {t.anomaly.review_recommended
+                    ? "Analyst review recommended"
+                    : t.anomaly.status === "READY"
+                      ? "No anomaly intervention recommended"
+                      : "Model abstained"}
+                </strong>
+              </p>
+              <p>
+                {t.anomaly.status === "READY"
+                  ? `Anomaly score ${t.anomaly.score!.toFixed(3)} / 1; review threshold ${t.anomaly.threshold}.`
+                  : t.anomaly.status === "INSUFFICIENT_HISTORY"
+                    ? "At least 20 earlier policy-approved transactions of the same type are needed."
+                    : "History has no feature variation; an anomaly score would be unreliable."}
+              </p>
+              <p>
+                {t.anomaly.baseline_count} baseline transactions in the previous{" "}
+                {t.anomaly.window_days} days. Saved model:{" "}
+                {t.anomaly.model_version}.
+              </p>
+              {t.anomaly.observations.length > 0 && (
+                <dl className="facts">
+                  {t.anomaly.observations.map((o) => (
+                    <div key={o.feature}>
+                      <dt>{o.feature}</dt>
+                      <dd>
+                        {o.observed.toFixed(3)}{" "}
+                        <small>
+                          baseline median {o.baseline_median.toFixed(3)}
+                        </small>
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+              <p className="muted">
+                Learned anomaly evidence supports human review. The rule
+                decision remains separate. This score is not a fraud
+                probability.
+              </p>
+            </>
+          ) : (
+            <p>
+              This record predates the anomaly model. Its original evidence is
+              preserved.
+            </p>
+          )}
+        </div>
+      </Panel>
       <div className="detail-grid">
         <Panel
           title="Triggered rule evidence"
@@ -1301,7 +1497,11 @@ function Detail({
         <summary>Original payload and rule configuration snapshot</summary>
         <pre>
           {JSON.stringify(
-            { payload: t.payload, rule_snapshot: t.rule_snapshot },
+            {
+              payload: t.payload,
+              rule_snapshot: t.rule_snapshot,
+              anomaly: t.anomaly,
+            },
             null,
             2,
           )}

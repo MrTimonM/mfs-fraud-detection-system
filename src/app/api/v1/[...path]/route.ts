@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
 import { withState, storageMode } from "@/lib/store";
 import { sessionValid } from "@/lib/auth";
+import { impactSummary } from "@/lib/impact";
 import {
   ingest,
   review,
@@ -42,6 +43,7 @@ async function handler(
         return {
           ...s,
           summary: summary(s),
+          impact: impactSummary(s),
           storage_mode: storageMode(),
           profiles: {
             users: profiles(s, "users"),
@@ -50,6 +52,8 @@ async function handler(
             agents: profiles(s, "agents"),
           },
         };
+      if (resource === "impact" && !id && method === "GET")
+        return impactSummary(s);
       if (resource === "transactions") {
         if (id === "analyze" && method === "POST") return ingest(s, body);
         if (method === "GET") {

@@ -3,6 +3,7 @@ import { mkdir, readFile, writeFile, rename } from "node:fs/promises";
 import { join } from "node:path";
 import type { State } from "./domain";
 import { emptyState, seedState } from "./scenarios";
+import deploymentConfig from "../../deployment.config.json";
 const globals = globalThis as unknown as {
   mfsSql?: ReturnType<typeof postgres>;
   mfsDemo?: State;
@@ -29,10 +30,11 @@ function guard() {
   if (
     process.env.VERCEL &&
     !process.env.DATABASE_URL &&
-    process.env.DEMO_MODE !== "true"
+    process.env.DEMO_MODE !== "true" &&
+    !deploymentConfig.publicDemo
   )
     throw new Error(
-      "Configure DATABASE_URL or explicitly enable DEMO_MODE=true for synthetic demonstrations",
+      "Configure DATABASE_URL or enable publicDemo in deployment.config.json for synthetic demonstrations",
     );
 }
 const collections = ["transactions", "rules", "cases", "audit"] as const;

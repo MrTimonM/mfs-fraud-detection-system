@@ -4,9 +4,20 @@
 
 A Mobile Financial Services fraud detection workspace built with Next.js, React, TypeScript, and PostgreSQL.
 
+Built for **Track 01: Trust & Risk Intelligence** of DIU CPC × upay AI Hackathon 2026. Helps fraud analysts investigate unusual transfers with saved evidence and human review.
+
+## Intelligence and measurable impact
+
+- **Learned behavior:** a TypeScript Isolation Forest learns account-specific amount, depletion, and velocity patterns from earlier policy-approved transactions. Model-only alerts create review cases while preserving the rule decision.
+- **Investigation brief:** explains what happened, why to investigate, and the next analyst action using saved evidence. Summaries are templates, not LLM-generated reasoning.
+- **Impact & validation:** tracks reviewed alert precision, false-positive reviews, review coverage, first-review time, confirmed fraud exposure, and channel review rates.
+- **Reproducible evidence:** `npm run evaluate` compares rules with rules plus anomaly review on separate synthetic validation/test accounts. See the [hackathon playbook](docs/hackathon-playbook.md) for assumptions, measured results, and the controlled-validation plan.
+
+Anomaly scores are not fraud probabilities. New accounts need sufficient history; consequential actions remain analyst recommendations.
+
 ## Phase 2: smarter detection with LightGBM
 
-**Next up:** combine explainable rules with a trained LightGBM model to catch more fraud and reduce false alarms. This phase is planned; the current app uses rule-based screening.
+**Next up:** add supervised LightGBM classification alongside the current rules and unsupervised anomaly model. LightGBM remains planned and has not been trained.
 
 - **Training data:** use analyst-confirmed fraud and false-positive labels with transaction, velocity, balance, device, and recipient features. Keep only information available at screening time and split training, validation, and test data chronologically.
 - **Improve LightGBM:** tune leaf count, tree depth, learning rate, and minimum samples per leaf; use early stopping and validate class weighting for imbalanced fraud data. See the [LightGBM tuning guide](https://lightgbm.readthedocs.io/en/stable/Parameters-Tuning.html).
@@ -32,6 +43,8 @@ npm run dev
 ```
 
 Open [localhost:3000](http://localhost:3000).
+
+Public demo mode is enabled in `deployment.config.json`. No `.env` file, database, password, or session secret is required for this demo. Vercel keeps synthetic activity in server memory; records can reset or differ between instances.
 
 ## API
 

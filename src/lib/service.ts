@@ -47,7 +47,7 @@ export function ingest(s: State, body: unknown): Analysis {
   }
   const a = analyze(payload, s);
   s.transactions.push(a);
-  if (a.decision !== "APPROVE")
+  if (a.decision !== "APPROVE" || a.anomaly?.review_recommended)
     s.cases.push({
       id: `case-${a.id}`,
       transaction_id: a.id,
@@ -59,7 +59,7 @@ export function ingest(s: State, body: unknown): Analysis {
     s,
     "TRANSACTION_ANALYZED",
     a.id,
-    { risk_score: a.risk_score, decision: a.decision },
+    { risk_score: a.risk_score, decision: a.decision, anomaly: a.anomaly },
     "engine",
   );
   return a;
@@ -182,7 +182,9 @@ export function summary(s: State) {
     return {
       timestamp: new Date(end).toISOString(),
       total: items.length,
-      flagged: items.filter((x) => x.decision !== "APPROVE").length,
+      flagged: items.filter(
+        (x) => x.decision !== "APPROVE" || x.anomaly?.review_recommended,
+      ).length,
     };
   });
   return {
@@ -230,7 +232,9 @@ export function profiles(
         count: tx.length,
         amount: tx.reduce((n, x) => n + x.payload.amount, 0),
         max_risk: Math.max(...tx.map((x) => x.risk_score)),
-        flagged: tx.filter((x) => x.decision !== "APPROVE").length,
+        flagged: tx.filter(
+          (x) => x.decision !== "APPROVE" || x.anomaly?.review_recommended,
+        ).length,
         last_seen: tx.at(-1)?.payload.timestamp,
       };
     })

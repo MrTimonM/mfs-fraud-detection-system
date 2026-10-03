@@ -21,6 +21,7 @@ All workflow endpoints are under `/api/v1`. Authentication uses the same analyst
 | GET | `/{entity-type}/{id}` | Entity profile and transaction history |
 | GET | `/audit` | Audit events |
 | GET | `/workspace` | Combined UI snapshot |
+| GET | `/impact` | Reviewed outcomes, exposure, review time, and channel queue rates |
 
 Lists are unpaginated in the prototype. The UI applies filters locally. Alert IDs and case IDs share the same flagged transaction case record, so updates remain consistent.
 
@@ -42,6 +43,10 @@ Lists are unpaginated in the prototype. The UI applies filters locally. Alert ID
 Required fields are transaction ID, user ID, transaction type, positive amount, balance before, and an ISO timestamp including timezone. See `src/lib/domain.ts` for the full schema and defaults. Amount and fee must fit the balance for outgoing transactions. Unknown fields, negative counters, invalid coordinates, invalid MSISDN values, and context timestamps after the transaction are rejected. Coordinate pairs are optional but must be supplied together.
 
 The response includes `id`, `payload`, `features`, `triggered_rules`, `rule_snapshot`, `risk_score`, `risk_level`, `decision`, `balance_after`, and `created_at`. `balance_after` is a projection, not an executed balance change.
+
+New records also save `anomaly`: model version, status (`READY`, `INSUFFICIENT_HISTORY`, or `INSUFFICIENT_VARIATION`), score (null when abstaining), review threshold, review recommendation, baseline IDs/digest/count, window, and observed feature values against baseline medians. Model scores are not fraud probabilities. A model-only review recommendation creates a case even if `decision` remains `APPROVE`. Old records can omit `anomaly`; original decisions are preserved.
+
+The workspace response includes an `impact` object matching `GET /impact`. Precision and coverage are null without a denominator; review time is null without a recorded review. Confirmed fraud exposure is transaction value, not prevented loss. Review labels use the latest explicit fraud/false-positive action, not alert status changes. See the [hackathon playbook](hackathon-playbook.md) for measurement limits.
 
 Use a new transaction ID for each attempt. An identical replay returns the original saved decision without creating a second alert; a conflicting replay returns 409.
 

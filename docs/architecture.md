@@ -20,7 +20,7 @@ Every database mutation obtains a PostgreSQL advisory transaction lock before lo
 
 For the prototype, requests load the stored collections into memory and evaluate history there. This supports demonstrations and small datasets, not high-volume payment processing. Production ingestion needs indexed time-window queries, retention, per-account concurrency, durable rate limits, and actual integration with payment authorization.
 
-Local demo state is saved atomically in `.data/state.json` with an in-process mutation queue. It is for one development server. Explicit Vercel demo mode keeps ephemeral state in memory. PostgreSQL mode never falls back to demo data if the database fails.
+Local demo state is saved atomically in `.data/state.json` with an in-process mutation queue. It is for one development server. Vercel demo mode is explicitly enabled by the checked-in `deployment.config.json`, requires no custom environment variables, and keeps ephemeral state in memory. PostgreSQL mode never falls back to demo data if the database fails.
 
 ## Scoring and signal definitions
 
@@ -40,6 +40,10 @@ Local demo state is saved atomically in `.data/state.json` with an in-process mu
 ## Authentication
 
 Persistent Vercel mode requires configured shared analyst authentication. Signed, expiring session cookies are HttpOnly, SameSite Strict, and Secure in production. API reads and writes verify authentication. Writes reject a conflicting Origin header. Password comparisons use timing-safe comparison. The shared role and instance-local login throttling are prototype boundaries, documented in the README.
+
+## Learned behavior and operational impact
+
+`src/lib/anomaly.ts` implements a versioned Isolation Forest on strictly earlier, account-specific policy-approved history. Anomaly scores and baseline evidence are saved separately from rule scores. Both rule interventions and model-only review recommendations create cases; neither executes wallet actions. `src/lib/impact.ts` builds template investigation briefs from saved evidence and calculates review outcome metrics. The authenticated `/api/v1/impact` endpoint exposes those metrics. See [the hackathon playbook](hackathon-playbook.md) for model parameters, synthetic assumptions, benchmark results, and limitations.
 
 ## Future inference
 

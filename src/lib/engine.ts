@@ -1,4 +1,5 @@
 import { randomUUID } from "node:crypto";
+import { detectAnomaly } from "./anomaly";
 import type {
   Analysis,
   Features,
@@ -231,6 +232,7 @@ export function analyze(t: TransactionInput, s: State): Analysis {
     id: randomUUID(),
     payload: t,
     features: f,
+    anomaly: detectAnomaly(t, f, s),
     triggered_rules: triggered,
     rule_snapshot: structuredClone(s.rules),
     risk_score: score,

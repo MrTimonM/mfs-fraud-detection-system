@@ -189,6 +189,7 @@ test("desktop and mobile routes have no overflow or browser errors", async ({
       "/rules",
       "/simulator",
       "/profiles",
+      "/impact",
       "/audit",
     ]) {
       await page.goto(route);
@@ -210,4 +211,88 @@ test("desktop and mobile routes have no overflow or browser errors", async ({
     });
   }
   expect(errors).toEqual([]);
+});
+
+test("behavior-only case preserves policy approval and exposes review impact", async ({
+  page,
+  request,
+}) => {
+  test.setTimeout(90000);
+  const user = "e2e-behavior-" + crypto.randomUUID();
+  const now = Date.now();
+  for (let i = 0; i < 48; i++) {
+    const t = scenario(
+      "normal",
+      new Date(now - (48 - i) * 43200000).toISOString(),
+    );
+    Object.assign(t, {
+      user_id: user,
+      transaction_id: `${user}-${i}`,
+      amount: 800 + ((i * 137) % 800),
+    });
+    const response = await request.post("/api/v1/transactions/analyze", {
+      data: t,
+    });
+    expect(response.ok()).toBe(true);
+  }
+  const t = scenario("normal", new Date(now).toISOString());
+  Object.assign(t, {
+    user_id: user,
+    transaction_id: `${user}-anomaly`,
+    amount: 9000,
+  });
+  const response = await request.post("/api/v1/transactions/analyze", {
+    data: t,
+  });
+  expect(response.ok()).toBe(true);
+  const a = await response.json();
+  expect(a.decision).toBe("APPROVE");
+  expect(a.anomaly.status).toBe("READY");
+  expect(a.anomaly.review_recommended).toBe(true);
+  const cases = await (await request.get("/api/v1/cases")).json();
+  const c = cases.find(
+    (c: { transaction_id: string }) => c.transaction_id === a.id,
+  );
+  expect(c).toBeTruthy();
+  await page.goto(`/cases/${c.id}`);
+  await expect(
+    page.getByText(
+      "Rule policy approves; behavior model recommends analyst review.",
+    ),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Investigation brief" }),
+  ).toBeVisible();
+  await page.getByLabel("Review action").selectOption("MARK_FALSE_POSITIVE");
+  await page
+    .getByLabel("Analyst notes")
+    .fill("Synthetic customer verified an unusual transfer.");
+  await page.getByRole("button", { name: "Save review" }).click();
+  await expect(
+    page.getByText("Review recorded. The screening decision is preserved."),
+  ).toBeVisible();
+  await page.reload();
+  await expect(
+    page.getByText("Synthetic customer verified an unusual transfer."),
+  ).toBeVisible();
+  await page.screenshot({
+    path: ".impeccable/review/behavior-evidence.png",
+    fullPage: true,
+  });
+  await page.goto("/impact");
+  await expect(
+    page.getByRole("heading", { name: "Channel review comparison" }),
+  ).toBeVisible();
+  await page.screenshot({
+    path: ".impeccable/review/impact-desktop.png",
+    fullPage: true,
+  });
+  await page.setViewportSize({ width: 390, height: 900 });
+  await page.screenshot({
+    path: ".impeccable/review/impact-mobile.png",
+    fullPage: true,
+  });
+  const metrics = await (await request.get("/api/v1/impact")).json();
+  expect(metrics.anomaly_only_cases).toBeGreaterThan(0);
+  expect(metrics.false_positive).toBeGreaterThan(0);
 });

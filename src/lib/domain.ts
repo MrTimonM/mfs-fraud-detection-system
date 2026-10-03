@@ -1,4 +1,5 @@
 import { z } from "zod";
+import type { AnomalyEvidence } from "./anomaly";
 const money = z.number().finite().min(0).max(10000000);
 const identifier = z.string().trim().min(1).max(100);
 export const transactionSchema = z
@@ -118,6 +119,7 @@ export interface Trigger {
   version: number;
 }
 export interface Analysis {
+  anomaly?: AnomalyEvidence;
   id: string;
   payload: TransactionInput;
   features: Features;

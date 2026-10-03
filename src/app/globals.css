@@ -175,6 +175,7 @@ table {
   position: fixed;
   inset: 0 auto 0 0;
   padding: 29px 15px 0;
+  overflow-y: auto;
 }
 .brand {
   display: flex;
@@ -1672,5 +1673,32 @@ td strong {
     scroll-behavior: auto !important;
     animation: none !important;
     transition: none !important;
+  }
+}
+.investigation-brief {
+  padding: 20px 24px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.investigation-brief h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+.investigation-brief p,
+.investigation-brief ul {
+  margin: 0 0 16px;
+}
+.investigation-brief .facts {
+  padding: 0;
+}
+.metric strong {
+  overflow-wrap: anywhere;
+}
+.impact-metrics .metric strong {
+  font-size: 24px;
+}
+@media (max-width: 600px) {
+  .investigation-brief {
+    padding: 16px;
   }
 }
