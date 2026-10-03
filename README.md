@@ -2,6 +2,8 @@
 
 **Spot suspicious transfers. Explain every decision. Act with confidence.**
 
+**Live demo:** [Open MFS Guard](https://mfs-fraud-detection-system.vercel.app)
+
 A Mobile Financial Services fraud detection workspace built with Next.js, React, TypeScript, and PostgreSQL.
 
 Built for **Track 01: Trust & Risk Intelligence** of DIU CPC × upay AI Hackathon 2026. Helps fraud analysts investigate unusual transfers with saved evidence and human review.
