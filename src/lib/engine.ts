@@ -19,7 +19,7 @@ export function calculateFeatures(t: TransactionInput, s: State): Features {
     .filter(
       (x) =>
         x.payload.user_id === t.user_id &&
-        Date.parse(x.payload.timestamp) < now,
+        Date.parse(x.payload.timestamp) <= now,
     )
     .sort(
       (a, b) =>
@@ -53,7 +53,7 @@ export function calculateFeatures(t: TransactionInput, s: State): Features {
     (x) =>
       x.payload.receiver_id === t.receiver_id &&
       x.payload.transaction_type !== "CASH_IN" &&
-      Date.parse(x.payload.timestamp) < now &&
+      Date.parse(x.payload.timestamp) <= now &&
       now - Date.parse(x.payload.timestamp) <= 86400000,
   );
   const senders = new Set(recipient.map((x) => x.payload.user_id));

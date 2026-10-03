@@ -44,6 +44,7 @@ export async function migrate() {
   await sql`INSERT INTO mfs_meta (id,data) VALUES ('config',${sql.json({ blacklisted_devices: ["device-blacklisted"], blacklisted_agents: ["agent-blacklisted"] })}) ON CONFLICT DO NOTHING`;
   for (const r of emptyState().rules)
     await sql`INSERT INTO mfs_rules (id,data) VALUES (${r.code},${sql.json(JSON.parse(JSON.stringify(r)))}) ON CONFLICT DO NOTHING`;
+  await sql`CREATE UNIQUE INDEX IF NOT EXISTS mfs_transaction_external_id ON mfs_transactions ((data->'payload'->>'transaction_id'))`;
 }
 export async function withState<T>(
   mutate: boolean,
@@ -69,6 +70,14 @@ export async function withState<T>(
           Date.parse(a.payload.timestamp) - Date.parse(b.payload.timestamp),
       );
       s.audit.sort((a, b) => Date.parse(a.timestamp) - Date.parse(b.timestamp));
+      const times = new Map(
+        s.transactions.map((t) => [t.id, Date.parse(t.payload.timestamp)]),
+      );
+      s.cases.sort(
+        (a, b) =>
+          (times.get(a.transaction_id) ?? 0) -
+          (times.get(b.transaction_id) ?? 0),
+      );
       const before = new Map(
         collections.map((name) => [
           name,

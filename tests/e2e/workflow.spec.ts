@@ -148,6 +148,32 @@ test("case notes are saved and visible after reload", async ({
     page.getByText("Known customer confirmed the synthetic transaction."),
   ).toBeVisible();
 });
+test("custom numeric rules can be created in the editor", async ({
+  page,
+  request,
+}) => {
+  const code =
+    "CUSTOM_E2E_" +
+    crypto.randomUUID().replaceAll("-", "").slice(0, 12).toUpperCase();
+  try {
+    await page.goto("/rules");
+    await page.getByRole("button", { name: "Add rule" }).click();
+    await page.getByLabel("Rule code", { exact: true }).fill(code);
+    await page
+      .getByLabel("Rule name", { exact: true })
+      .fill("Synthetic test rule");
+    await page.getByLabel("Weight", { exact: true }).fill("0");
+    await page.getByRole("button", { name: "Save rule" }).click();
+    await expect(page.getByRole("dialog")).not.toBeVisible();
+    await expect(page.locator("tr").filter({ hasText: code })).toBeVisible();
+    const rules = await (await request.get("/api/v1/rules")).json();
+    expect(
+      rules.find((r: { code: string }) => r.code === code).condition.feature,
+    ).toBe("tx_count_5m");
+  } finally {
+    await request.patch("/api/v1/rules/" + code, { data: { enabled: false } });
+  }
+});
 test("desktop and mobile routes have no overflow or browser errors", async ({
   page,
 }) => {

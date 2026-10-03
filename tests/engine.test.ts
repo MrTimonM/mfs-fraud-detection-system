@@ -7,8 +7,46 @@ import {
   type State,
   type TransactionInput,
 } from "../src/lib/domain";
-import { ingest, review, updateRule } from "../src/lib/service";
+import { ingest, review, updateRule, createRule } from "../src/lib/service";
 const now = "2026-10-04T06:00:00.000Z";
+test("duplicate detection tolerates JSONB object key reordering", () => {
+  const s = emptyState();
+  const t = scenario("normal", now);
+  const a = ingest(s, t);
+  a.payload = Object.fromEntries(
+    Object.entries(a.payload).reverse(),
+  ) as TransactionInput;
+  assert.equal(ingest(s, t).id, a.id);
+});
+test("velocity includes earlier stored attempts at the same timestamp", () => {
+  const s = emptyState();
+  s.transactions.push(analyze(scenario("normal", now), emptyState()));
+  assert.equal(
+    calculateFeatures(
+      { ...scenario("normal", now), transaction_id: "same-time-next-attempt" },
+      s,
+    ).tx_count_5m,
+    2,
+  );
+});
+test("custom rules evaluate configured feature conditions and preserve versions", () => {
+  const s = emptyState();
+  createRule(s, {
+    code: "CUSTOM_INTEGRITY",
+    name: "Device integrity risk",
+    description: "Detect elevated combined integrity flags",
+    category: "DEVICE",
+    enabled: true,
+    weight: 45,
+    threshold: 25,
+    severity: "HIGH",
+    condition: { feature: "device_risk_score", operator: "gte" },
+  });
+  const a = analyze({ ...scenario("normal", now), rooted_device: true }, s);
+  assert.ok(a.triggered_rules.some((x) => x.code === "CUSTOM_INTEGRITY"));
+  assert.equal(a.decision, "STEP_UP_AUTH");
+  assert.throws(() => createRule(s, { code: "R017" }));
+});
 test("three advertised scenarios have deterministic decisions", () => {
   for (const [kind, decision] of [
     ["normal", "APPROVE"],
