@@ -2,7 +2,7 @@
 
 **Spot suspicious transfers. Explain every decision. Act with confidence.**
 
-**Live demo:** [Open MFS Guard](https://mfs-fraud-detection-system.vercel.app)
+
 
 A Mobile Financial Services fraud detection workspace built with Next.js, React, TypeScript, and PostgreSQL.
 
