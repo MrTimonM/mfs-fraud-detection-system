@@ -1,0 +1,9 @@
+{
+  "training_time_seconds": 1.7530204000004233,
+  "peak_memory_mb": 1578.72265625,
+  "threshold": 0.025762316695533118,
+  "calibration": "sigmoid",
+  "kind": "anomaly",
+  "feature_columns": null,
+  "meta_columns": null
+}
