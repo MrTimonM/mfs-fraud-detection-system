@@ -1,0 +1,19 @@
+model,policy,monitor_threshold,step_up_threshold,hold_threshold,estimated_fraud_loss,estimated_false_positive_cost,estimated_verification_cost,estimated_hold_cost,total_estimated_business_cost,cost_per_transaction,approve_count,monitor_count,step_up_count,hold_count
+LightGBM_200k,validation tiers: monitor/step-up/hold,0.0822292528592832,0.2051668105856975,0.445,3802700.0000000005,19095.0,6674.0,6136.0,3834605.0000000005,38.346050000000005,88390,7506,3337,767
+LightGBM_200k,validation cost-optimal binary (all flagged step-up),,0.03734065190623851,,2454000.0,147430.0,66356.0,0.0,2667786.0,26.67786,66822,0,33178,0
+Hybrid_WithoutSequence_500k,validation tiers: monitor/step-up/hold,0.0806032539496203,0.215,0.365,3736400.0,20350.0,7020.0,6384.0,3770154.0,37.70154,86295,9397,3510,798
+Hybrid_WithoutSequence_500k,validation cost-optimal binary (all flagged step-up),,0.02053237997280341,,1888500.0,274475.0,118682.0,0.0,2281657.0,22.81657,40659,0,59341,0
+XGBoost_500k,validation tiers: monitor/step-up/hold,0.085,0.225,0.365,3884050.0,13150.0,7640.0,856.0,3905696.0,39.05696,88093,7980,3820,107
+XGBoost_500k,validation cost-optimal binary (all flagged step-up),,0.02372645027935505,,2029500.0,235030.0,102528.0,0.0,2367058.0,23.67058,48736,0,51264,0
+FullHybrid_500k,validation tiers: monitor/step-up/hold,0.085,0.235,0.385,3751250.0,18020.0,8288.0,3360.0,3780918.0,37.80918,87233,8203,4144,420
+FullHybrid_500k,validation cost-optimal binary (all flagged step-up),,0.01987353206865402,,1818750.0,294480.0,126870.0,0.0,2240100.0,22.401,36565,0,63435,0
+RulesOnly_500k,validation tiers: monitor/step-up/hold,0.065,0.065,0.135,4286600.0,43930.0,13738.0,7736.0,4352004.0,43.52004,92164,0,6869,967
+RulesOnly_500k,validation cost-optimal binary (all flagged step-up),,0.005,,1305750.0,473885.0,200000.0,0.0,1979635.0,19.79635,0,0,100000,0
+LightGBM_500k,validation tiers: monitor/step-up/hold,0.0584795321637426,0.215,0.395,3720650.0,15690.0,9702.0,0.0,3746042.0,37.46042,86354,8795,4851,0
+LightGBM_500k,validation cost-optimal binary (all flagged step-up),,0.02129471890971039,,1688250.0,330225.0,141516.0,0.0,2159991.0,21.59991,29242,0,70758,0
+Hybrid_AddAnomaly_500k,validation tiers: monitor/step-up/hold,0.08030334618641,0.225,0.375,3805200.0,17085.0,6820.0,4520.0,3833625.0,38.33625,86342,9683,3410,565
+Hybrid_AddAnomaly_500k,validation cost-optimal binary (all flagged step-up),,0.019189228548554118,,1812000.0,296740.0,127792.0,0.0,2236532.0,22.36532,36104,0,63896,0
+Hybrid_RulesSupervised_500k,validation tiers: monitor/step-up/hold,0.0804233727622437,0.225,0.375,3808850.0,16995.0,6854.0,4384.0,3837083.0,38.37083,86333,9692,3427,548
+Hybrid_RulesSupervised_500k,validation cost-optimal binary (all flagged step-up),,0.01979078578520262,,1847250.0,285230.0,123094.0,0.0,2255574.0,22.55574,38453,0,61547,0
+IsolationForest_500k,validation tiers: monitor/step-up/hold,0.065,0.065,0.095,4388200.0,65335.0,22062.0,6976.0,4482573.0,44.82573,88097,0,11031,872
+IsolationForest_500k,validation cost-optimal binary (all flagged step-up),,0.005,,1310250.0,473145.0,199692.0,0.0,1983087.0,19.83087,154,0,99846,0

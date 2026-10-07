@@ -45,7 +45,7 @@ def card(d, info):
     lines += ['', f'Time range: {info["time_range"][0]} to {info["time_range"][1]}', '',
         'Definitions: cold start = fewer than five prior customer events (`behavioral_model_active == 0`, the anomaly '
         'layer abstains); new device = device not previously seen for that customer; new recipient = first transfer '
-        'to that receiver; high velocity = three or more prior customer events in the previous five minutes.', '']
+        'to that receiver; high velocity = two or more prior customer events in the previous five minutes.', '']
     for title, key in [('Fraud-type distribution', 'fraud_types'), ('Channel distribution', 'channels'),
                        ('Transaction-type distribution', 'transaction_types')]:
         lines += [f'## {title}', '', '| Value | Count | % |', '|---|---:|---:|']
@@ -95,12 +95,12 @@ def main(seed):
         'devices': int(d.device_id.nunique()), 'agents': int(d.loc[d.agent_id >= 0, 'agent_id'].nunique()),
         'merchants': int(d.loc[d.merchant_id >= 0, 'merchant_id'].nunique()), 'columns': len(d.columns),
         'model_feature_count': len(feature_columns(d)), 'fraud_count': int(d.fraud_label.sum()),
-        'fraud_prevalence_percent': round(100*d.fraud_label.mean(), 3),
-        'cold_start_percent': round(100*(d.behavioral_model_active == 0).mean(), 3),
-        'new_device_percent': round(100*d.device_is_new.mean(), 3),
-        'new_recipient_percent': round(100*d.first_time_recipient.mean(), 3),
-        'night_transaction_percent': round(100*d.is_night_transaction.mean(), 3),
-        'high_velocity_percent': round(100*(d.tx_count_5m >= 3).mean(), 3),
+        'fraud_prevalence_percent': round(float(100*d.fraud_label.mean()), 3),
+        'cold_start_percent': round(float(100*(d.behavioral_model_active == 0).mean()), 3),
+        'new_device_percent': round(float(100*d.device_is_new.mean()), 3),
+        'new_recipient_percent': round(float(100*d.first_time_recipient.mean()), 3),
+        'night_transaction_percent': round(float(100*d.is_night_transaction.mean()), 3),
+        'high_velocity_percent': round(float(100*(d.tx_count_5m >= 2).mean()), 3),
         'time_range': [str(d.timestamp.min()), str(d.timestamp.max())],
         'fraud_types': pct(d.fraud_type.value_counts()), 'channels': pct(d.channel.value_counts()),
         'transaction_types': pct(d.transaction_type.value_counts()),
@@ -108,7 +108,7 @@ def main(seed):
             'new_device': int(fraud.device_is_new.sum()), 'known_device': int((fraud.device_is_new == 0).sum()),
             'first_time_recipient': int(fraud.first_time_recipient.sum()),
             'known_recipient': int((fraud.first_time_recipient == 0).sum()),
-            'high_velocity': int((fraud.tx_count_5m >= 3).sum()),
+            'high_velocity': int((fraud.tx_count_5m >= 2).sum()),
             'sim_changed_recently': int(fraud.sim_changed_recently.sum())},
         'missing': {'columns_with_missing': {c: int(v) for c, v in d.isna().sum().items() if v},
                     'total_missing_cells': int(d.isna().sum().sum())},

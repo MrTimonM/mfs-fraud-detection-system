@@ -8,5 +8,7 @@ data/final_test/
 logs/
 results/*/test_predictions*
 results/*/hybrid_predictions.csv
+results/**/*predictions*.csv
+results/**/*predictions*.parquet
 data/metadata/profiles_*.csv
 data/metadata/profiles_*.parquet
