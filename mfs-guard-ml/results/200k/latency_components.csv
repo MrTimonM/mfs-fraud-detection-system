@@ -1,0 +1,8 @@
+stage,mean_ms,p50_ms,p95_ms,p99_ms,repeats,scope
+prepared_frame_encoding,8.056113999991794,8.066500000040833,9.236285000179123,9.786860999947748,50,"single-process batch-1, historical frame available; does not measure state retrieval"
+rules,1.2166500000239466,1.1491999998725078,1.583955000387504,1.8580900000233667,50,"single-process batch-1, historical frame available; does not measure state retrieval"
+supervised_estimator,0.4879399999299494,0.47459999996135593,0.5868599993846144,0.727775000350448,50,"single-process batch-1, historical frame available; does not measure state retrieval"
+anomaly_with_its_preprocessing,8.454519999995682,7.901099999799044,9.724814999799491,18.518037000076188,50,"single-process batch-1, historical frame available; does not measure state retrieval"
+fusion_estimator_with_meta_scaling,0.26672800004234887,0.2642500003275927,0.28271999967728334,0.29178400016462547,50,"single-process batch-1, historical frame available; does not measure state retrieval"
+final_calibration,0.003865999915433349,0.0036999999792897142,0.0041549993056833046,0.006589000304302309,50,"single-process batch-1, historical frame available; does not measure state retrieval"
+total_prepared_frame_hybrid,19.064281999999366,18.682299999909446,21.890414999916175,22.813213999534124,50,"single-process batch-1, historical frame available; does not measure state retrieval"

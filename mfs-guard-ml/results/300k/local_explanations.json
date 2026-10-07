@@ -1,0 +1,914 @@
+[
+  {
+    "transaction_id": "TX42_000267967",
+    "explanation_scale": "uncalibrated tree raw margin",
+    "top_positive_risk_factors": [
+      {
+        "feature": "balance_inquiry_count_5m",
+        "value": 4.961460113525391,
+        "shap": 0.6942441515136248
+      },
+      {
+        "feature": "otp_resend_count",
+        "value": 3.9213874340057373,
+        "shap": 0.6780303569949838
+      },
+      {
+        "feature": "transaction_type_SEND_MONEY",
+        "value": 1.0,
+        "shap": 0.5769666620223661
+      },
+      {
+        "feature": "failed_pin_attempts",
+        "value": 7.932075500488281,
+        "shap": 0.5437607533699563
+      },
+      {
+        "feature": "device_risk_score",
+        "value": 6.385321140289307,
+        "shap": 0.5188317387715226
+      }
+    ],
+    "top_negative_risk_factors": [
+      {
+        "feature": "time_since_last_recipient_tx",
+        "value": -0.690990149974823,
+        "shap": -0.10056651183629944
+      },
+      {
+        "feature": "recipient_frequency_user",
+        "value": 1.1745885610580444,
+        "shap": -0.09492252302097588
+      },
+      {
+        "feature": "recent_inflow_amount_24h",
+        "value": 0.8646435141563416,
+        "shap": -0.05082566193390204
+      },
+      {
+        "feature": "behavioral_history_count",
+        "value": 2.7972586154937744,
+        "shap": -0.019517553084153517
+      },
+      {
+        "feature": "preferred_channel_mismatch",
+        "value": -0.5747622847557068,
+        "shap": -0.014241586390309717
+      }
+    ],
+    "feature_value_space": "standardized numeric features or one-hot categories; see raw_context for original units",
+    "raw_context": {
+      "amount": 5216.20947265625,
+      "balance_before": 50489.5546875,
+      "transaction_type": "SEND_MONEY",
+      "channel": "USSD",
+      "amount_vs_user_mean": 2.57265305519104,
+      "tx_count_5m": 0.0,
+      "first_time_recipient": 0.0,
+      "device_is_new": 1.0,
+      "failed_pin_attempts": 4,
+      "otp_resend_count": 2,
+      "device_risk_score": 76.0,
+      "recipient_risk_score": 5.0,
+      "sequence_risk_score": 24.0,
+      "mule_network_score": 4.0,
+      "behavioral_history_count": 81.0
+    }
+  },
+  {
+    "transaction_id": "TX42_000287808",
+    "explanation_scale": "uncalibrated tree raw margin",
+    "top_positive_risk_factors": [
+      {
+        "feature": "transaction_type_SEND_MONEY",
+        "value": 1.0,
+        "shap": 0.6765138585098662
+      },
+      {
+        "feature": "balance_inquiry_count_5m",
+        "value": 4.961460113525391,
+        "shap": 0.6658861087646973
+      },
+      {
+        "feature": "otp_resend_count",
+        "value": 3.9213874340057373,
+        "shap": 0.4754268390385478
+      },
+      {
+        "feature": "failed_pin_attempts",
+        "value": 3.7841720581054688,
+        "shap": 0.3005676060904966
+      },
+      {
+        "feature": "vpn_active",
+        "value": 4.63015079498291,
+        "shap": 0.29519037589335356
+      }
+    ],
+    "top_negative_risk_factors": [
+      {
+        "feature": "user_mean_daily_tx_count",
+        "value": -0.5479227304458618,
+        "shap": -0.08096567796560634
+      },
+      {
+        "feature": "device_risk_score",
+        "value": -0.29915088415145874,
+        "shap": -0.04361673256070238
+      },
+      {
+        "feature": "preferred_channel_mismatch",
+        "value": -0.5747622847557068,
+        "shap": -0.023963052262065597
+      },
+      {
+        "feature": "transaction_type_CASH_OUT",
+        "value": 0.0,
+        "shap": -0.013877694348977171
+      },
+      {
+        "feature": "user_max_amount_30d",
+        "value": -0.34558942914009094,
+        "shap": -0.013649977306596865
+      }
+    ],
+    "feature_value_space": "standardized numeric features or one-hot categories; see raw_context for original units",
+    "raw_context": {
+      "amount": 2748.6328125,
+      "balance_before": 191024.578125,
+      "transaction_type": "SEND_MONEY",
+      "channel": "APP",
+      "amount_vs_user_mean": 0.719007134437561,
+      "tx_count_5m": 1.0,
+      "first_time_recipient": 1.0,
+      "device_is_new": 0.0,
+      "failed_pin_attempts": 2,
+      "otp_resend_count": 2,
+      "device_risk_score": 4.0,
+      "recipient_risk_score": 10.0,
+      "sequence_risk_score": 12.0,
+      "mule_network_score": 8.0,
+      "behavioral_history_count": 67.0
+    }
+  },
+  {
+    "transaction_id": "TX42_000274563",
+    "explanation_scale": "uncalibrated tree raw margin",
+    "top_positive_risk_factors": [
+      {
+        "feature": "otp_resend_count",
+        "value": 8.191822052001953,
+        "shap": 0.7670497607692464
+      },
+      {
+        "feature": "balance_inquiry_count_5m",
+        "value": 10.356026649475098,
+        "shap": 0.6396956309568514
+      },
+      {
+        "feature": "transaction_type_SEND_MONEY",
+        "value": 1.0,
+        "shap": 0.5688306161059868
+      },
+      {
+        "feature": "failed_pin_attempts",
+        "value": 10.006027221679688,
+        "shap": 0.5151195104155961
+      },
+      {
+        "feature": "vpn_active",
+        "value": 4.63015079498291,
+        "shap": 0.30133777639236425
+      }
+    ],
+    "top_negative_risk_factors": [
+      {
+        "feature": "recipient_frequency_user",
+        "value": 0.43326514959335327,
+        "shap": -0.11012211552263572
+      },
+      {
+        "feature": "time_since_last_recipient_tx",
+        "value": -0.6910433173179626,
+        "shap": -0.10298645014505908
+      },
+      {
+        "feature": "transaction_hour",
+        "value": -1.5676343441009521,
+        "shap": -0.03897072612797007
+      },
+      {
+        "feature": "previous_longitude",
+        "value": -1.075798749923706,
+        "shap": -0.02528318424574855
+      },
+      {
+        "feature": "user_receiver_tx_count_30d",
+        "value": 1.848757266998291,
+        "shap": -0.02150919845185716
+      }
+    ],
+    "feature_value_space": "standardized numeric features or one-hot categories; see raw_context for original units",
+    "raw_context": {
+      "amount": 4281.28564453125,
+      "balance_before": 141586.59375,
+      "transaction_type": "SEND_MONEY",
+      "channel": "WEB",
+      "amount_vs_user_mean": 1.646078109741211,
+      "tx_count_5m": 0.0,
+      "first_time_recipient": 0.0,
+      "device_is_new": 1.0,
+      "failed_pin_attempts": 5,
+      "otp_resend_count": 4,
+      "device_risk_score": 48.0,
+      "recipient_risk_score": 10.0,
+      "sequence_risk_score": 12.0,
+      "mule_network_score": 8.0,
+      "behavioral_history_count": 61.0
+    }
+  },
+  {
+    "transaction_id": "TX42_000256944",
+    "explanation_scale": "uncalibrated tree raw margin",
+    "top_positive_risk_factors": [
+      {
+        "feature": "device_risk_score",
+        "value": 6.756680488586426,
+        "shap": 0.6803839694364712
+      },
+      {
+        "feature": "transaction_type_SEND_MONEY",
+        "value": 1.0,
+        "shap": 0.45306552700037095
+      },
+      {
+        "feature": "device_fingerprint_changed",
+        "value": 4.643146991729736,
+        "shap": 0.3874039399591926
+      },
+      {
+        "feature": "recipient_frequency_user",
+        "value": -1.0313005447387695,
+        "shap": 0.3371515662630373
+      },
+      {
+        "feature": "balance_inquiry_count_5m",
+        "value": 3.163270950317383,
+        "shap": 0.30486237426653473
+      }
+    ],
+    "top_negative_risk_factors": [
+      {
+        "feature": "recent_inflow_amount_24h",
+        "value": -0.0014516107039526105,
+        "shap": -0.05624298559321436
+      },
+      {
+        "feature": "user_mean_daily_tx_count",
+        "value": -0.5689111948013306,
+        "shap": -0.03811060900434301
+      },
+      {
+        "feature": "preferred_channel_mismatch",
+        "value": -0.5747622847557068,
+        "shap": -0.017322098430003735
+      },
+      {
+        "feature": "device_age_days",
+        "value": 2.4865331649780273,
+        "shap": -0.014804350600292011
+      },
+      {
+        "feature": "receiver_unique_senders_7d",
+        "value": -0.6026661992073059,
+        "shap": -0.01262528671819501
+      }
+    ],
+    "feature_value_space": "standardized numeric features or one-hot categories; see raw_context for original units",
+    "raw_context": {
+      "amount": 3864.968505859375,
+      "balance_before": 139733.515625,
+      "transaction_type": "SEND_MONEY",
+      "channel": "APP",
+      "amount_vs_user_mean": 1.7789027690887451,
+      "tx_count_5m": 2.0,
+      "first_time_recipient": 1.0,
+      "device_is_new": 1.0,
+      "failed_pin_attempts": 2,
+      "otp_resend_count": 1,
+      "device_risk_score": 80.0,
+      "recipient_risk_score": 0.0,
+      "sequence_risk_score": 12.0,
+      "mule_network_score": 0.0,
+      "behavioral_history_count": 58.0
+    }
+  },
+  {
+    "transaction_id": "TX42_000282832",
+    "explanation_scale": "uncalibrated tree raw margin",
+    "top_positive_risk_factors": [
+      {
+        "feature": "balance_inquiry_count_5m",
+        "value": 4.961460113525391,
+        "shap": 0.7377504907741826
+      },
+      {
+        "feature": "otp_resend_count",
+        "value": 3.9213874340057373,
+        "shap": 0.679323764326898
+      },
+      {
+        "feature": "transaction_type_SEND_MONEY",
+        "value": 1.0,
+        "shap": 0.6699016110007319
+      },
+      {
+        "feature": "failed_pin_attempts",
+        "value": 5.858123779296875,
+        "shap": 0.544695124192314
+      },
+      {
+        "feature": "sequence_risk_score",
+        "value": 6.346645355224609,
+        "shap": 0.24714951879284291
+      }
+    ],
+    "top_negative_risk_factors": [
+      {
+        "feature": "preferred_channel_mismatch",
+        "value": -0.5747622847557068,
+        "shap": -0.027855862537637995
+      },
+      {
+        "feature": "device_risk_score",
+        "value": -0.29915088415145874,
+        "shap": -0.024043217160512016
+      },
+      {
+        "feature": "device_age_days",
+        "value": 3.1176929473876953,
+        "shap": -0.015559186838171393
+      },
+      {
+        "feature": "transaction_type_CASH_OUT",
+        "value": 0.0,
+        "shap": -0.01526809540837721
+      },
+      {
+        "feature": "impossible_travel_speed",
+        "value": -0.12716208398342133,
+        "shap": -0.013555742504941
+      }
+    ],
+    "feature_value_space": "standardized numeric features or one-hot categories; see raw_context for original units",
+    "raw_context": {
+      "amount": 8406.927734375,
+      "balance_before": 160379.078125,
+      "transaction_type": "SEND_MONEY",
+      "channel": "APP",
+      "amount_vs_user_mean": 2.025282859802246,
+      "tx_count_5m": 0.0,
+      "first_time_recipient": 1.0,
+      "device_is_new": 0.0,
+      "failed_pin_attempts": 3,
+      "otp_resend_count": 2,
+      "device_risk_score": 4.0,
+      "recipient_risk_score": 0.0,
+      "sequence_risk_score": 48.0,
+      "mule_network_score": 0.0,
+      "behavioral_history_count": 89.0
+    }
+  },
+  {
+    "transaction_id": "TX42_000269885",
+    "explanation_scale": "uncalibrated tree raw margin",
+    "top_positive_risk_factors": [
+      {
+        "feature": "balance_inquiry_count_5m",
+        "value": 4.961460113525391,
+        "shap": 0.5089119392736879
+      },
+      {
+        "feature": "transaction_type_SEND_MONEY",
+        "value": 1.0,
+        "shap": 0.47191201484521345
+      },
+      {
+        "feature": "device_risk_score",
+        "value": 7.499399662017822,
+        "shap": 0.45261770339421414
+      },
+      {
+        "feature": "otp_resend_count",
+        "value": 8.191822052001953,
+        "shap": 0.40019190781430897
+      },
+      {
+        "feature": "failed_pin_attempts",
+        "value": 7.932075500488281,
+        "shap": 0.35399648892701
+      }
+    ],
+    "top_negative_risk_factors": [
+      {
+        "feature": "user_mean_daily_tx_count",
+        "value": -0.5149698257446289,
+        "shap": -0.03674999979421247
+      },
+      {
+        "feature": "previous_longitude",
+        "value": 3.477498769760132,
+        "shap": -0.03135550299736089
+      },
+      {
+        "feature": "previous_latitude",
+        "value": 1.9104423522949219,
+        "shap": -0.026175656415383913
+      },
+      {
+        "feature": "amount_vs_user_mean",
+        "value": -0.2791154086589813,
+        "shap": -0.01556695756015384
+      },
+      {
+        "feature": "receiver_unique_senders_7d",
+        "value": -1.3286305665969849,
+        "shap": -0.012799795135682438
+      }
+    ],
+    "feature_value_space": "standardized numeric features or one-hot categories; see raw_context for original units",
+    "raw_context": {
+      "amount": 1069.0830078125,
+      "balance_before": 55080.80859375,
+      "transaction_type": "SEND_MONEY",
+      "channel": "API",
+      "amount_vs_user_mean": 0.7945870757102966,
+      "tx_count_5m": 1.0,
+      "first_time_recipient": 1.0,
+      "device_is_new": 1.0,
+      "failed_pin_attempts": 4,
+      "otp_resend_count": 4,
+      "device_risk_score": 88.0,
+      "recipient_risk_score": 0.0,
+      "sequence_risk_score": 24.0,
+      "mule_network_score": 0.0,
+      "behavioral_history_count": 64.0
+    }
+  },
+  {
+    "transaction_id": "TX42_000289467",
+    "explanation_scale": "uncalibrated tree raw margin",
+    "top_positive_risk_factors": [
+      {
+        "feature": "device_risk_score",
+        "value": 6.756680488586426,
+        "shap": 0.590379239514185
+      },
+      {
+        "feature": "transaction_type_SEND_MONEY",
+        "value": 1.0,
+        "shap": 0.5640665322801917
+      },
+      {
+        "feature": "otp_resend_count",
+        "value": 3.9213874340057373,
+        "shap": 0.5484737905560513
+      },
+      {
+        "feature": "failed_pin_attempts",
+        "value": 7.932075500488281,
+        "shap": 0.5367305170292362
+      },
+      {
+        "feature": "multiple_otp_then_transfer",
+        "value": 9.381938934326172,
+        "shap": 0.28634782471036513
+      }
+    ],
+    "top_negative_risk_factors": [
+      {
+        "feature": "recipient_frequency_user",
+        "value": 0.42530563473701477,
+        "shap": -0.08015574789299768
+      },
+      {
+        "feature": "customer_segment_REGULAR",
+        "value": 1.0,
+        "shap": -0.02186854692605201
+      },
+      {
+        "feature": "balance_inquiry_count_5m",
+        "value": -0.4331066310405731,
+        "shap": -0.01790899474227117
+      },
+      {
+        "feature": "latitude",
+        "value": -1.8032164573669434,
+        "shap": -0.016773941464981495
+      },
+      {
+        "feature": "preferred_channel_mismatch",
+        "value": -0.5747622847557068,
+        "shap": -0.01224786548444455
+      }
+    ],
+    "feature_value_space": "standardized numeric features or one-hot categories; see raw_context for original units",
+    "raw_context": {
+      "amount": 1774.6329345703125,
+      "balance_before": 46619.16796875,
+      "transaction_type": "SEND_MONEY",
+      "channel": "APP",
+      "amount_vs_user_mean": 2.065014123916626,
+      "tx_count_5m": 0.0,
+      "first_time_recipient": 0.0,
+      "device_is_new": 1.0,
+      "failed_pin_attempts": 4,
+      "otp_resend_count": 2,
+      "device_risk_score": 80.0,
+      "recipient_risk_score": 10.0,
+      "sequence_risk_score": 36.0,
+      "mule_network_score": 8.0,
+      "behavioral_history_count": 92.0
+    }
+  },
+  {
+    "transaction_id": "TX42_000265833",
+    "explanation_scale": "uncalibrated tree raw margin",
+    "top_positive_risk_factors": [
+      {
+        "feature": "otp_resend_count",
+        "value": 6.056604862213135,
+        "shap": 0.6193685795790572
+      },
+      {
+        "feature": "balance_inquiry_count_5m",
+        "value": 4.961460113525391,
+        "shap": 0.5743225792792515
+      },
+      {
+        "feature": "transaction_type_SEND_MONEY",
+        "value": 1.0,
+        "shap": 0.5362314963484497
+      },
+      {
+        "feature": "failed_pin_attempts",
+        "value": 5.858123779296875,
+        "shap": 0.474870188044319
+      },
+      {
+        "feature": "device_risk_score",
+        "value": 3.4144444465637207,
+        "shap": 0.34193259828032374
+      }
+    ],
+    "top_negative_risk_factors": [
+      {
+        "feature": "recent_inflow_amount_24h",
+        "value": 0.8971862196922302,
+        "shap": -0.05921231802314069
+      },
+      {
+        "feature": "behavioral_history_count",
+        "value": 3.819145441055298,
+        "shap": -0.05667513276315964
+      },
+      {
+        "feature": "time_since_previous_tx_seconds",
+        "value": -0.13573595881462097,
+        "shap": -0.030593534018205748
+      },
+      {
+        "feature": "vpn_active",
+        "value": -0.21597570180892944,
+        "shap": -0.018005988427889884
+      },
+      {
+        "feature": "device_age_days",
+        "value": 2.6189122200012207,
+        "shap": -0.016501371021262264
+      }
+    ],
+    "feature_value_space": "standardized numeric features or one-hot categories; see raw_context for original units",
+    "raw_context": {
+      "amount": 6458.2109375,
+      "balance_before": 124129.84375,
+      "transaction_type": "SEND_MONEY",
+      "channel": "USSD",
+      "amount_vs_user_mean": 1.8890362977981567,
+      "tx_count_5m": 2.0,
+      "first_time_recipient": 1.0,
+      "device_is_new": 1.0,
+      "failed_pin_attempts": 3,
+      "otp_resend_count": 3,
+      "device_risk_score": 44.0,
+      "recipient_risk_score": 60.0,
+      "sequence_risk_score": 12.0,
+      "mule_network_score": 88.0,
+      "behavioral_history_count": 100.0
+    }
+  },
+  {
+    "transaction_id": "TX42_000298580",
+    "explanation_scale": "uncalibrated tree raw margin",
+    "top_positive_risk_factors": [
+      {
+        "feature": "otp_resend_count",
+        "value": 3.9213874340057373,
+        "shap": 0.6959798972787776
+      },
+      {
+        "feature": "transaction_type_SEND_MONEY",
+        "value": 1.0,
+        "shap": 0.624323513788864
+      },
+      {
+        "feature": "failed_pin_attempts",
+        "value": 5.858123779296875,
+        "shap": 0.44617599351972687
+      },
+      {
+        "feature": "device_risk_score",
+        "value": 5.64260196685791,
+        "shap": 0.38685765026876723
+      },
+      {
+        "feature": "multiple_otp_then_transfer",
+        "value": 9.381938934326172,
+        "shap": 0.3158359590173036
+      }
+    ],
+    "top_negative_risk_factors": [
+      {
+        "feature": "recipient_frequency_user",
+        "value": 0.7090599536895752,
+        "shap": -0.09105980774401336
+      },
+      {
+        "feature": "previous_latitude",
+        "value": 1.1892640590667725,
+        "shap": -0.02404671328585114
+      },
+      {
+        "feature": "device_fingerprint_changed",
+        "value": -0.21537117660045624,
+        "shap": -0.014041057633687938
+      },
+      {
+        "feature": "preferred_channel_mismatch",
+        "value": -0.5747622847557068,
+        "shap": -0.013525823281413687
+      },
+      {
+        "feature": "behavioral_history_count",
+        "value": 2.582124710083008,
+        "shap": -0.012613572724837048
+      }
+    ],
+    "feature_value_space": "standardized numeric features or one-hot categories; see raw_context for original units",
+    "raw_context": {
+      "amount": 9034.7578125,
+      "balance_before": 65988.96875,
+      "transaction_type": "SEND_MONEY",
+      "channel": "USSD",
+      "amount_vs_user_mean": 2.2057011127471924,
+      "tx_count_5m": 0.0,
+      "first_time_recipient": 0.0,
+      "device_is_new": 1.0,
+      "failed_pin_attempts": 3,
+      "otp_resend_count": 2,
+      "device_risk_score": 68.0,
+      "recipient_risk_score": 0.0,
+      "sequence_risk_score": 24.0,
+      "mule_network_score": 0.0,
+      "behavioral_history_count": 77.0
+    }
+  },
+  {
+    "transaction_id": "TX42_000263029",
+    "explanation_scale": "uncalibrated tree raw margin",
+    "top_positive_risk_factors": [
+      {
+        "feature": "otp_resend_count",
+        "value": 6.056604862213135,
+        "shap": 0.8226013694299389
+      },
+      {
+        "feature": "transaction_type_SEND_MONEY",
+        "value": 1.0,
+        "shap": 0.6333751810949212
+      },
+      {
+        "feature": "failed_pin_attempts",
+        "value": 5.858123779296875,
+        "shap": 0.4683804441503685
+      },
+      {
+        "feature": "balance_inquiry_count_5m",
+        "value": 3.163270950317383,
+        "shap": 0.36214635634289666
+      },
+      {
+        "feature": "sequence_risk_score",
+        "value": 2.9463229179382324,
+        "shap": 0.22625931623865497
+      }
+    ],
+    "top_negative_risk_factors": [
+      {
+        "feature": "preferred_channel_mismatch",
+        "value": -0.5747622847557068,
+        "shap": -0.0262802502526714
+      },
+      {
+        "feature": "device_risk_score",
+        "value": -0.29915088415145874,
+        "shap": -0.02306680212560485
+      },
+      {
+        "feature": "receiver_unique_senders_7d",
+        "value": -0.23968404531478882,
+        "shap": -0.017637348801721773
+      },
+      {
+        "feature": "amount_sum_24h",
+        "value": 0.312123566865921,
+        "shap": -0.014630896756632686
+      },
+      {
+        "feature": "transaction_type_CASH_OUT",
+        "value": 0.0,
+        "shap": -0.014072908044549678
+      }
+    ],
+    "feature_value_space": "standardized numeric features or one-hot categories; see raw_context for original units",
+    "raw_context": {
+      "amount": 5221.865234375,
+      "balance_before": 127042.046875,
+      "transaction_type": "SEND_MONEY",
+      "channel": "APP",
+      "amount_vs_user_mean": 1.786073923110962,
+      "tx_count_5m": 0.0,
+      "first_time_recipient": 1.0,
+      "device_is_new": 0.0,
+      "failed_pin_attempts": 3,
+      "otp_resend_count": 3,
+      "device_risk_score": 4.0,
+      "recipient_risk_score": 5.0,
+      "sequence_risk_score": 24.0,
+      "mule_network_score": 4.0,
+      "behavioral_history_count": 92.0
+    }
+  },
+  {
+    "transaction_id": "TX42_000280212",
+    "explanation_scale": "uncalibrated tree raw margin",
+    "top_positive_risk_factors": [
+      {
+        "feature": "device_risk_score",
+        "value": 6.756680488586426,
+        "shap": 0.6173471047723658
+      },
+      {
+        "feature": "balance_inquiry_count_5m",
+        "value": 4.961460113525391,
+        "shap": 0.5444991977121681
+      },
+      {
+        "feature": "transaction_type_SEND_MONEY",
+        "value": 1.0,
+        "shap": 0.43733019757542246
+      },
+      {
+        "feature": "recipient_frequency_user",
+        "value": -1.0313005447387695,
+        "shap": 0.33474439847869575
+      },
+      {
+        "feature": "device_fingerprint_changed",
+        "value": 4.643146991729736,
+        "shap": 0.31583490459125974
+      }
+    ],
+    "top_negative_risk_factors": [
+      {
+        "feature": "recent_outflow_amount_24h",
+        "value": -0.543399453163147,
+        "shap": -0.02518912431525949
+      },
+      {
+        "feature": "sequence_risk_score",
+        "value": -0.45399972796440125,
+        "shap": -0.02038357996395067
+      },
+      {
+        "feature": "user_max_amount_30d",
+        "value": -0.6144876480102539,
+        "shap": -0.013258887301083131
+      },
+      {
+        "feature": "receiver_unique_senders_7d",
+        "value": 0.12329813092947006,
+        "shap": -0.012274086280018255
+      },
+      {
+        "feature": "device_os_changed",
+        "value": -0.20294421911239624,
+        "shap": -0.012065295480635504
+      }
+    ],
+    "feature_value_space": "standardized numeric features or one-hot categories; see raw_context for original units",
+    "raw_context": {
+      "amount": 1321.5860595703125,
+      "balance_before": 73972.5078125,
+      "transaction_type": "SEND_MONEY",
+      "channel": "APP",
+      "amount_vs_user_mean": 1.1357442140579224,
+      "tx_count_5m": 0.0,
+      "first_time_recipient": 1.0,
+      "device_is_new": 1.0,
+      "failed_pin_attempts": 2,
+      "otp_resend_count": 1,
+      "device_risk_score": 80.0,
+      "recipient_risk_score": 5.0,
+      "sequence_risk_score": 0.0,
+      "mule_network_score": 4.0,
+      "behavioral_history_count": 87.0
+    }
+  },
+  {
+    "transaction_id": "TX42_000274390",
+    "explanation_scale": "uncalibrated tree raw margin",
+    "top_positive_risk_factors": [
+      {
+        "feature": "otp_resend_count",
+        "value": 6.056604862213135,
+        "shap": 0.7288704338249713
+      },
+      {
+        "feature": "device_risk_score",
+        "value": 6.756680488586426,
+        "shap": 0.6024690482100313
+      },
+      {
+        "feature": "transaction_type_SEND_MONEY",
+        "value": 1.0,
+        "shap": 0.5646411057811267
+      },
+      {
+        "feature": "balance_inquiry_count_5m",
+        "value": 3.163270950317383,
+        "shap": 0.3470040439805999
+      },
+      {
+        "feature": "device_fingerprint_changed",
+        "value": 4.643146991729736,
+        "shap": 0.32967292327734793
+      }
+    ],
+    "top_negative_risk_factors": [
+      {
+        "feature": "recipient_frequency_user",
+        "value": 0.3609878718852997,
+        "shap": -0.10503879850898384
+      },
+      {
+        "feature": "behavioral_history_count",
+        "value": 2.582124710083008,
+        "shap": -0.030996746657243005
+      },
+      {
+        "feature": "device_age_days",
+        "value": 2.860030174255371,
+        "shap": -0.030847767644028256
+      },
+      {
+        "feature": "user_median_amount",
+        "value": 1.031882643699646,
+        "shap": -0.017862678265742338
+      },
+      {
+        "feature": "user_mean_amount",
+        "value": 1.3764837980270386,
+        "shap": -0.015333575111536917
+      }
+    ],
+    "feature_value_space": "standardized numeric features or one-hot categories; see raw_context for original units",
+    "raw_context": {
+      "amount": 24413.12109375,
+      "balance_before": 269753.09375,
+      "transaction_type": "SEND_MONEY",
+      "channel": "APP",
+      "amount_vs_user_mean": 3.542567491531372,
+      "tx_count_5m": 0.0,
+      "first_time_recipient": 0.0,
+      "device_is_new": 1.0,
+      "failed_pin_attempts": 2,
+      "otp_resend_count": 3,
+      "device_risk_score": 80.0,
+      "recipient_risk_score": 0.0,
+      "sequence_risk_score": 12.0,
+      "mule_network_score": 0.0,
+      "behavioral_history_count": 77.0
+    }
+  }
+]

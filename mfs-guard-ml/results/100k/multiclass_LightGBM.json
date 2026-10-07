@@ -1,0 +1,75 @@
+{
+  "ACCOUNT_TAKEOVER": {
+    "precision": 0.25815217391304346,
+    "recall": 0.6597222222222222,
+    "f1-score": 0.37109375,
+    "support": 144.0
+  },
+  "AGENT_FRAUD": {
+    "precision": 0.023316062176165803,
+    "recall": 0.25,
+    "f1-score": 0.04265402843601896,
+    "support": 36.0
+  },
+  "CASH_OUT_ABUSE": {
+    "precision": 0.147239263803681,
+    "recall": 0.75,
+    "f1-score": 0.24615384615384617,
+    "support": 64.0
+  },
+  "DEVICE_FRAUD": {
+    "precision": 0.0600375234521576,
+    "recall": 0.5925925925925926,
+    "f1-score": 0.10902896081771721,
+    "support": 54.0
+  },
+  "LEGITIMATE": {
+    "precision": 0.9788158034106557,
+    "recall": 0.646495032880929,
+    "f1-score": 0.7786812723825574,
+    "support": 14294.0
+  },
+  "MULE_ACTIVITY": {
+    "precision": 0.17914438502673796,
+    "recall": 0.6504854368932039,
+    "f1-score": 0.2809224318658281,
+    "support": 103.0
+  },
+  "SIM_SWAP_PATTERN": {
+    "precision": 0.08542713567839195,
+    "recall": 0.5666666666666667,
+    "f1-score": 0.14847161572052403,
+    "support": 30.0
+  },
+  "SOCIAL_ENGINEERING": {
+    "precision": 0.08831168831168831,
+    "recall": 0.4657534246575342,
+    "f1-score": 0.14847161572052403,
+    "support": 73.0
+  },
+  "SUBTLE_FRAUD": {
+    "precision": 0.014388489208633094,
+    "recall": 0.2830188679245283,
+    "f1-score": 0.02738475581926061,
+    "support": 106.0
+  },
+  "VELOCITY_FRAUD": {
+    "precision": 0.035437430786267994,
+    "recall": 0.3333333333333333,
+    "f1-score": 0.06406406406406406,
+    "support": 96.0
+  },
+  "accuracy": 0.6403333333333333,
+  "macro avg": {
+    "precision": 0.18702699557674227,
+    "recall": 0.5198067577171009,
+    "f1-score": 0.22169263409803402,
+    "support": 15000.0
+  },
+  "weighted avg": {
+    "precision": 0.9382840224380026,
+    "recall": 0.6403333333333333,
+    "f1-score": 0.7506910055777573,
+    "support": 15000.0
+  }
+}

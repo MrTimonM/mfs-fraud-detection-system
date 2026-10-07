@@ -1,0 +1,2 @@
+batch_size,mean_ms,median_ms,p50_ms,p95_ms,p99_ms,transactions_per_second,repeats,scope,model
+1,10.009720999923957,8.963199999925564,8.963199999925564,13.337520000004588,14.076387000168326,99.90288440682782,100,single-process local prepared-frame preprocessing + models + calibration; excludes historical state lookup,LightGBM

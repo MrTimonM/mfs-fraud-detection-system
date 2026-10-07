@@ -1,0 +1,37 @@
+{
+  "train": {
+    "active_fraction": 0.9107142686843872,
+    "abstentions": 18750,
+    "fallback": "Training prevalence; behavioral_model_active exposes abstention to fusion"
+  },
+  "tune": {
+    "active_fraction": 1.0,
+    "abstentions": 0,
+    "fallback": "Training prevalence; behavioral_model_active exposes abstention to fusion"
+  },
+  "fusion": {
+    "active_fraction": 1.0,
+    "abstentions": 0,
+    "fallback": "Training prevalence; behavioral_model_active exposes abstention to fusion"
+  },
+  "calibrate": {
+    "active_fraction": 1.0,
+    "abstentions": 0,
+    "fallback": "Training prevalence; behavioral_model_active exposes abstention to fusion"
+  },
+  "select": {
+    "active_fraction": 1.0,
+    "abstentions": 0,
+    "fallback": "Training prevalence; behavioral_model_active exposes abstention to fusion"
+  },
+  "threshold": {
+    "active_fraction": 1.0,
+    "abstentions": 0,
+    "fallback": "Training prevalence; behavioral_model_active exposes abstention to fusion"
+  },
+  "test": {
+    "active_fraction": 1.0,
+    "abstentions": 0,
+    "fallback": "Training prevalence; behavioral_model_active exposes abstention to fusion"
+  }
+}
