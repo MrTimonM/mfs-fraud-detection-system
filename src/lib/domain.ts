@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { AnomalyEvidence } from "./anomaly";
+import type { ModelEvidence, SystemMode } from "./ml";
 const money = z.number().finite().min(0).max(10000000);
 const identifier = z.string().trim().min(1).max(100);
 export const transactionSchema = z
@@ -70,7 +71,12 @@ export const transactionSchema = z
   });
 export type TransactionInput = z.infer<typeof transactionSchema>;
 export type RiskLevel = "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
-export type Decision = "APPROVE" | "STEP_UP_AUTH" | "REJECT_AND_FREEZE";
+export type Decision =
+  | "APPROVE"
+  | "APPROVE_AND_MONITOR"
+  | "STEP_UP_AUTH"
+  | "TEMPORARY_HOLD"
+  | "REJECT_AND_FREEZE";
 export interface Rule {
   code: string;
   name: string;
@@ -128,6 +134,10 @@ export interface Analysis {
   risk_score: number;
   risk_level: RiskLevel;
   decision: Decision;
+  rule_decision?: Decision;
+  ml?: ModelEvidence & { round_trip_ms?: number };
+  system_mode?: SystemMode;
+  model_error?: string;
   balance_after: number;
   created_at: string;
 }

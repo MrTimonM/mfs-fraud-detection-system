@@ -46,7 +46,15 @@ def describe(name: str, v: float, row: pd.Series) -> str:
         'tx_count_5m': lambda: f'{int(v)} transactions in last 5 min',
         'tx_count_1h': lambda: f'{int(v)} transactions in last hour',
         'distance_from_home_km': lambda: f'{v:.0f} km from home location',
-        'behavioral_history_count': lambda: f'only {int(v)} prior transactions (thin history)' if v < 5 else f'{int(v)} prior transactions',
+        'recipient_frequency_user': lambda: 'no prior transfers to this recipient' if v == 0 else f'{v:.0%} of past transfers went to this recipient',
+        'time_since_last_recipient_tx': lambda: 'never transacted with this recipient before' if v >= 1e8 else f'last sent to this recipient {v/3600:.1f}h ago',
+        'time_since_previous_tx_seconds': lambda: 'no previous transaction on record' if v >= 1e8 else f'{v:.0f}s since previous transaction',
+        'device_transaction_count_24h': lambda: f'{int(v)} transactions on this device in 24h',
+        'transaction_type': lambda: f'transaction type {v}',
+        'channel': lambda: f'channel {v}',
+        'balance_before': lambda: f'balance before transaction {_fmt(v)}',
+        'amount': lambda: f'amount {_fmt(v)}',
+        'behavioral_history_count':lambda: f'only {int(v)} prior transactions (thin history)' if v < 5 else f'{int(v)} prior transactions',
     }
     if name in phrases:
         text = phrases[name]()

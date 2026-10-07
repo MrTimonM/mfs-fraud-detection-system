@@ -3,6 +3,8 @@ import { ZodError } from "zod";
 import { withState, storageMode } from "@/lib/store";
 import { sessionValid } from "@/lib/auth";
 import { impactSummary } from "@/lib/impact";
+import { transactionSchema } from "@/lib/domain";
+import { scoreWithModel, modelServiceUrl } from "@/lib/ml";
 import {
   ingest,
   review,
@@ -38,6 +40,14 @@ async function handler(
         throw new HttpError(413, "Request is too large");
       body = await req.json();
     }
+    // Pre-authorization ML scoring happens outside the state lock.
+    const parsed =
+      resource === "transactions" && id === "analyze" && method === "POST"
+        ? transactionSchema.safeParse(body)
+        : null;
+    const model = parsed?.success
+      ? await scoreWithModel(parsed.data)
+      : undefined;
     const result = await withState(method !== "GET", (s) => {
       if (resource === "workspace" && method === "GET")
         return {
@@ -45,6 +55,7 @@ async function handler(
           summary: summary(s),
           impact: impactSummary(s),
           storage_mode: storageMode(),
+          model_service: modelServiceUrl() ? "configured" : "not_configured",
           profiles: {
             users: profiles(s, "users"),
             devices: profiles(s, "devices"),
@@ -55,7 +66,7 @@ async function handler(
       if (resource === "impact" && !id && method === "GET")
         return impactSummary(s);
       if (resource === "transactions") {
-        if (id === "analyze" && method === "POST") return ingest(s, body);
+        if (id === "analyze" && method === "POST") return ingest(s, body, model);
         if (method === "GET") {
           if (id) {
             const t = s.transactions.find(

@@ -35,3 +35,6 @@ threadpoolctl==3.7.0
 tqdm==4.70.1
 tzdata==2026.5
 xgboost==3.4.1
+fastapi==0.142.2
+uvicorn==0.54.0
+httpx==0.28.1

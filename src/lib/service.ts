@@ -8,6 +8,7 @@ import {
   type Analysis,
 } from "./domain";
 import { analyze } from "./engine";
+import { applyModel, type ModelOutcome } from "./ml";
 export class HttpError extends Error {
   constructor(
     public status: number,
@@ -32,7 +33,11 @@ export function audit(
     timestamp: new Date().toISOString(),
   });
 }
-export function ingest(s: State, body: unknown): Analysis {
+export function ingest(
+  s: State,
+  body: unknown,
+  model?: ModelOutcome,
+): Analysis {
   const payload = transactionSchema.parse(body);
   const existing = s.transactions.find(
     (x) => x.payload.transaction_id === payload.transaction_id,
@@ -45,7 +50,7 @@ export function ingest(s: State, body: unknown): Analysis {
       );
     return existing;
   }
-  const a = analyze(payload, s);
+  const a = model ? applyModel(analyze(payload, s), model) : analyze(payload, s);
   s.transactions.push(a);
   if (a.decision !== "APPROVE" || a.anomaly?.review_recommended)
     s.cases.push({
@@ -59,7 +64,17 @@ export function ingest(s: State, body: unknown): Analysis {
     s,
     "TRANSACTION_ANALYZED",
     a.id,
-    { risk_score: a.risk_score, decision: a.decision, anomaly: a.anomaly },
+    {
+      risk_score: a.risk_score,
+      decision: a.decision,
+      rule_decision: a.rule_decision,
+      system_mode: a.system_mode,
+      model_version: a.ml?.model_version ?? null,
+      fraud_probability: a.ml?.fraud_probability ?? null,
+      model_latency_ms: a.ml?.latency_ms ?? null,
+      triggered_rules: a.triggered_rules.map((r) => r.code),
+      anomaly: a.anomaly,
+    },
     "engine",
   );
   return a;
@@ -190,7 +205,11 @@ export function summary(s: State) {
   return {
     total: tx.length,
     approved: tx.filter((x) => x.decision === "APPROVE").length,
+    monitor: tx.filter((x) => x.decision === "APPROVE_AND_MONITOR").length,
     step_up: tx.filter((x) => x.decision === "STEP_UP_AUTH").length,
+    hold: tx.filter((x) => x.decision === "TEMPORARY_HOLD").length,
+    degraded: tx.filter((x) => x.system_mode === "DEGRADED").length,
+    ml_scored: tx.filter((x) => x.ml).length,
     rejected: tx.filter((x) => x.decision === "REJECT_AND_FREEZE").length,
     open_cases: s.cases.filter(
       (x) => x.status === "NEW" || x.status === "UNDER_REVIEW",

@@ -102,13 +102,19 @@ async function api<T>(
   return result;
 }
 export function Badge({ value }: { value: string }) {
-  const tone = ["CRITICAL", "REJECT_AND_FREEZE", "CONFIRMED_FRAUD"].includes(
+  const tone = [
+    "CRITICAL",
+    "REJECT_AND_FREEZE",
+    "TEMPORARY_HOLD",
+    "CONFIRMED_FRAUD",
+    "DEGRADED",
+  ].includes(
     value,
   )
     ? "red"
-    : ["HIGH", "MEDIUM", "STEP_UP_AUTH", "UNDER_REVIEW"].includes(value)
+    : ["HIGH", "MEDIUM", "STEP_UP_AUTH", "UNDER_REVIEW", "APPROVE_AND_MONITOR"].includes(value)
       ? "amber"
-      : ["LOW", "APPROVE", "FALSE_POSITIVE", "CLOSED"].includes(value)
+      : ["LOW", "APPROVE", "FALSE_POSITIVE", "CLOSED", "ML_ACTIVE"].includes(value)
         ? "green"
         : "blue";
   return (
@@ -452,14 +458,15 @@ function Dashboard({ data }: { data: WorkspaceData }) {
       <div className="metrics">
         {[
           ["Transactions screened", s.total, "All stored transactions"],
-          ["Approved", s.approved, "Low-risk decisions"],
-          ["Verification required", s.step_up, "Step-up authentication"],
-          ["Rejected / freeze", s.rejected, "Critical-risk recommendations"],
-          ["Open cases", s.open_cases, "Awaiting analyst disposition"],
+          ["Approve", s.approved + (s.monitor ?? 0), `${s.monitor ?? 0} with monitoring`],
+          ["Step-up", s.step_up, "Verify before authorizing"],
+          ["Hold", s.hold ?? 0, "Temporary hold, analyst review"],
+          ["Reject", s.rejected, "Reject and freeze recommendations"],
+          ["Open cases", s.open_cases, `${s.ml_scored ?? 0} AI-scored, ${s.degraded ?? 0} model unavailable`],
         ].map(([name, count, caption], i) => (
           <div className="metric" key={name}>
             <span>{name}</span>
-            <strong className={i === 3 ? "danger-text" : ""}>
+            <strong className={i === 3 || i === 4 ? "danger-text" : ""}>
               {Number(count).toLocaleString()}
             </strong>
             <small>{caption}</small>
@@ -758,7 +765,13 @@ function TransactionList({ data }: { data: WorkspaceData }) {
           label="Decision"
           value={decision}
           set={setDecision}
-          options={["APPROVE", "STEP_UP_AUTH", "REJECT_AND_FREEZE"]}
+          options={[
+            "APPROVE",
+            "APPROVE_AND_MONITOR",
+            "STEP_UP_AUTH",
+            "TEMPORARY_HOLD",
+            "REJECT_AND_FREEZE",
+          ]}
         />
         <Select
           label="Type"
@@ -933,7 +946,12 @@ function CaseList({ data, alerts }: { data: WorkspaceData; alerts: boolean }) {
           label="Decision"
           value={decision}
           set={setDecision}
-          options={["STEP_UP_AUTH", "REJECT_AND_FREEZE"]}
+          options={[
+            "APPROVE_AND_MONITOR",
+            "STEP_UP_AUTH",
+            "TEMPORARY_HOLD",
+            "REJECT_AND_FREEZE",
+          ]}
         />
         <Select
           label="Type"
@@ -1134,6 +1152,63 @@ function Impact({ data }: { data: WorkspaceData }) {
     </>
   );
 }
+function ModelPanel({ t }: { t: Analysis }) {
+  const m = t.ml;
+  const pct = (v: number | null | undefined) =>
+    v === null || v === undefined ? "Abstained" : `${(v * 100).toFixed(1)}%`;
+  return (
+    <Panel title="AI fraud model">
+      <div className="investigation-brief">
+        {m ? (
+          <>
+            <dl className="facts">
+              {[
+                ["Fraud probability", pct(m.fraud_probability)],
+                ["Risk level", m.risk_level],
+                ["Decision", label(t.decision)],
+                ["Rule risk", `${m.rule_risk_score}/100`],
+                ["Behavioral anomaly", pct(m.anomaly_score)],
+                ["Device risk", `${m.device_risk.toFixed(0)}/100`],
+                ["Recipient risk", `${m.recipient_risk.toFixed(0)}/100`],
+                ["Graph risk", `${m.graph_risk.toFixed(0)}/100`],
+                ["Model version", m.model_version],
+                ["Scoring latency", `${m.latency_ms.toFixed(1)} ms`],
+              ].map(([k, v]) => (
+                <div key={k}>
+                  <dt>{k}</dt>
+                  <dd>{v}</dd>
+                </div>
+              ))}
+            </dl>
+            {m.top_risk_factors.length > 0 && (
+              <>
+                <h3>Top risk factors</h3>
+                <ul>
+                  {m.top_risk_factors.map((f, i) => (
+                    <li key={i}>{f}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+            <p className="muted">
+              {m.model} scores the transaction before authorization. Risk
+              factors come from SHAP attributions and rule triggers.
+              {m.requires_human_review ? " Human review is required." : ""}
+            </p>
+          </>
+        ) : (
+          <>
+            <p>
+              <Badge value="DEGRADED" /> The AI model was unavailable, so this
+              transaction is held for analyst review.
+            </p>
+            {t.model_error && <p className="muted">{t.model_error}</p>}
+          </>
+        )}
+      </div>
+    </Panel>
+  );
+}
 function Evidence({ t }: { t: Analysis }) {
   const p = t.payload;
   const brief = investigationBrief(t);
@@ -1154,11 +1229,15 @@ function Evidence({ t }: { t: Analysis }) {
           <p>
             {t.decision === "APPROVE"
               ? t.anomaly?.review_recommended
-                ? "Rule policy approves; behavior model recommends analyst review."
+                ? "AI model approves; behavior model recommends analyst review."
                 : "Transaction meets the current approval policy."
-              : t.decision === "STEP_UP_AUTH"
-                ? "Require additional identity verification before proceeding."
-                : "Reject this transaction and recommend an account freeze."}
+              : t.decision === "APPROVE_AND_MONITOR"
+                ? "Approve, and keep this account under monitoring."
+                : t.decision === "STEP_UP_AUTH"
+                  ? "Require additional identity verification before proceeding."
+                  : t.decision === "TEMPORARY_HOLD"
+                    ? "Hold the funds until an analyst reviews this transaction."
+                    : "Reject this transaction and recommend an account freeze."}
           </p>
         </div>
         <div className="result-score">
@@ -1169,6 +1248,7 @@ function Evidence({ t }: { t: Analysis }) {
           <Badge value={t.risk_level} />
         </div>
       </div>
+      <ModelPanel t={t} />
       <Panel title="Investigation brief">
         <div className="investigation-brief">
           <h3>What happened?</h3>

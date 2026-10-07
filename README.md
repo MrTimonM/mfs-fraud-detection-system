@@ -26,6 +26,19 @@ Anomaly scores are not fraud probabilities. New accounts need sufficient history
 - **Measure results:** compare against the rule engine using PR-AUC, precision, recall, F1, and false-positive rate. Choose decision thresholds on validation data and report final results on the held-out test set.
 - **Explain and integrate:** add SHAP explanations, versioned models and feature schemas, and validated model-plus-rule decisions. Monitor drift and retrain with reviewed cases.
 
+## AI fraud model (LightGBM)
+
+The selected LightGBM model (see `mfs-guard-ml/reports/final_model_selection.md`) scores every transaction **before authorization** through the Python scoring service in `mfs-guard-ml/backend`. Its decision (`APPROVE`, `APPROVE_AND_MONITOR`, `STEP_UP_AUTH`, `TEMPORARY_HOLD`, `REJECT_AND_FREEZE`) is the final decision. The model is on by default at `http://127.0.0.1:8000` (override with `MFS_ML_SERVICE_URL`).
+
+```sh
+cd mfs-guard-ml
+.venv/Scripts/python -m uvicorn backend.app.main:app --port 8000
+# in the repo root, separate terminal
+npm run dev
+```
+
+If the scoring service is unreachable, the transaction is marked `DEGRADED` and held (`TEMPORARY_HOLD`) for analyst review; it is never silently approved. The public Vercel demo cannot reach a local service, so it needs a hosted service URL.
+
 ## What works today
 
 - 18 configurable fraud rules, custom rules, and transparent risk scores from 0–100.
