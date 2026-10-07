@@ -1,0 +1,22 @@
+{
+  "training_time_seconds": 0.01752829999986716,
+  "peak_memory_mb": 1514.6953125,
+  "dependencies": [
+    "XGBoost",
+    "IsolationForest"
+  ],
+  "base_training_time_excluded": true,
+  "threshold": 0.02053237997280341,
+  "calibration": "sigmoid",
+  "kind": "fusion",
+  "feature_columns": null,
+  "meta_columns": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    7
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "training_time_seconds": 2.158459899999798,
+  "peak_memory_mb": 1751.1171875,
+  "threshold": 0.005,
+  "calibration": "isotonic",
+  "kind": "anomaly",
+  "feature_columns": null,
+  "meta_columns": null
+}
