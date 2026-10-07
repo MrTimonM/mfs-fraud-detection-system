@@ -1,1 +1,33 @@
-{"selected_model":"LightGBM_200k","scale":"200k","artifact_model":"LightGBM"}
+{
+  "selected_model": "LightGBM_200k",
+  "scale": "200k",
+  "artifact_model": "LightGBM",
+  "recommended_threshold": 0.2051668105856975,
+  "tied_with_best_pr_auc": [
+    "LightGBM_200k",
+    "Hybrid_WithoutSequence_500k",
+    "Hybrid_AddAnomaly_500k",
+    "Hybrid_RulesSupervised_500k"
+  ],
+  "rule": "among models whose paired PR-AUC delta CI vs best includes 0, choose fewest components then lowest P95 latency",
+  "answers": {
+    "best_pr_auc": {
+      "model": "LightGBM_200k"
+    },
+    "best_recall": {
+      "model": "LightGBM_500k"
+    },
+    "fewest_fn": {
+      "model": "LightGBM_500k"
+    },
+    "lowest_fpr": {
+      "model": "XGBoost_500k"
+    },
+    "fastest_p95": {
+      "model": "RulesOnly_500k"
+    },
+    "lowest_cost": {
+      "model": "LightGBM_500k"
+    }
+  }
+}

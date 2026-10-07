@@ -1,0 +1,16 @@
+{
+  "model_name": "LightGBM",
+  "artifact": "models/200k/LightGBM.joblib",
+  "version": "LightGBM_200k-v1",
+  "training_dataset_size": 200000,
+  "training_seed": 42,
+  "training_date": "2026-10-07T03:55:52.394155+00:00",
+  "exported_at_utc": "2026-10-07T05:16:34.414646+00:00",
+  "feature_count": 130,
+  "calibration": "sigmoid",
+  "PR-AUC": 0.24168254665613428,
+  "ROC-AUC": 0.7660494270950774,
+  "metrics_source": "common final test set (seed 2026, 100k, synthetic)",
+  "recommended_threshold": 0.2051668105856975,
+  "synthetic_only": true
+}
