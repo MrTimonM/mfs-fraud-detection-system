@@ -82,5 +82,4 @@ See the [API reference](docs/api.md) for payloads, responses, and all endpoints.
 
 - [Architecture](docs/architecture.md) — scoring, storage, and authentication.
 - [Demo scenarios](docs/demo-scenarios.md) — sample transactions and expected decisions.
-- [Video demo guide](docs/video-demo-guide.md) — timed narration, screen actions, recording preparation, and judge questions.
 - [Implementation plan](IMPLEMENTATION_PLAN.md) — system design and roadmap.
