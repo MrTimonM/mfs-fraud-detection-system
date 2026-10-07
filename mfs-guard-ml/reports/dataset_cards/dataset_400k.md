@@ -1,0 +1,175 @@
+# Synthetic MFS dataset 400k
+
+This project uses synthetic data only. Results do not represent real upay production performance.
+
+- rows: 400000
+- users: 5000
+- receivers: 5000
+- devices: 6666
+- agents: 333
+- merchants: 500
+- date_range: ['2026-01-01 00:06:31.063640598+00:00', '2026-05-02 13:36:22.289682310+00:00']
+- columns: 154
+- fraud_prevalence: 0.049335
+- fraud_types: {'LEGITIMATE': 380266, 'ACCOUNT_TAKEOVER': 3561, 'SUBTLE_FRAUD': 3228, 'MULE_ACTIVITY': 2400, 'VELOCITY_FRAUD': 2274, 'SOCIAL_ENGINEERING': 2175, 'DEVICE_FRAUD': 1920, 'CASH_OUT_ABUSE': 1611, 'SIM_SWAP_PATTERN': 1362, 'AGENT_FRAUD': 1203}
+- transaction_types: {'SEND_MONEY': 120165, 'CASH_IN': 76499, 'CASH_OUT': 71588, 'MERCHANT_PAYMENT': 39006, 'MOBILE_RECHARGE': 29391, 'BANK_TRANSFER': 23857, 'BILL_PAYMENT': 22708, 'REMITTANCE': 16786}
+- channels: {'APP': 157587, 'AGENT': 126901, 'USSD': 81027, 'WEB': 18522, 'API': 15963}
+
+Seed 42 by default; actual seed and full configuration are in generation metadata. Persistent customer profiles, wallet accounting and three-event latent episodes simulate 120 days. Risky episodes overlap legitimate stress; outcomes are noisy. Histories are emitted before state updates; no label-based reputation. Around 80 events per user intentionally trades user breadth for historical depth. Missing agent/merchant IDs use -1. Authentication and balance-inquiry counters are simulated pre-event telemetry. PageRank and deep sequence networks are omitted for CPU feasibility; graph degrees, components and temporal patterns are exact over observed ledger events. Only nine scenario families are simulated; profile stations, episode durations and loss assumptions are not real-world estimates. No independent real-data validation.
+
+## Feature inventory
+
+- `transaction_id`: observable context or past-only derived signal
+- `user_id`: observable context or past-only derived signal
+- `receiver_id`: observable context or past-only derived signal
+- `device_id`: observable context or past-only derived signal
+- `session_id`: observable context or past-only derived signal
+- `timestamp`: outcome, identifier or context; see leakage audit
+- `transaction_type`: observable context or past-only derived signal
+- `channel`: observable context or past-only derived signal
+- `currency`: observable context or past-only derived signal
+- `amount`: observable context or past-only derived signal
+- `agent_id`: observable context or past-only derived signal
+- `merchant_id`: observable context or past-only derived signal
+- `fraud_label`: outcome, identifier or context; see leakage audit
+- `fraud_type`: outcome, identifier or context; see leakage audit
+- `typical_transaction_amount`: observable context or past-only derived signal
+- `home_latitude`: observable context or past-only derived signal
+- `home_longitude`: observable context or past-only derived signal
+- `preferred_channel`: observable context or past-only derived signal
+- `preferred_transaction_type`: observable context or past-only derived signal
+- `customer_segment`: observable context or past-only derived signal
+- `account_age_days`: observable context or past-only derived signal
+- `normal_active_hour_start`: observable context or past-only derived signal
+- `normal_active_hour_end`: observable context or past-only derived signal
+- `normal_location_radius_km`: observable context or past-only derived signal
+- `wallet_balance_tendency`: observable context or past-only derived signal
+- `failed_pin_attempts`: observable context or past-only derived signal
+- `otp_resend_count`: observable context or past-only derived signal
+- `balance_inquiry_count_5m`: observable context or past-only derived signal
+- `pin_reset_recently`: observable context or past-only derived signal
+- `password_reset_recently`: observable context or past-only derived signal
+- `biometric_failed_recently`: observable context or past-only derived signal
+- `rooted_device`: observable context or past-only derived signal
+- `emulator_detected`: observable context or past-only derived signal
+- `vpn_active`: observable context or past-only derived signal
+- `screen_share_detected`: observable context or past-only derived signal
+- `sim_changed_recently`: observable context or past-only derived signal
+- `device_os_changed`: observable context or past-only derived signal
+- `device_fingerprint_changed`: observable context or past-only derived signal
+- `blacklisted_device`: observable context or past-only derived signal
+- `blacklisted_agent`: observable context or past-only derived signal
+- `latitude`: observable context or past-only derived signal
+- `longitude`: observable context or past-only derived signal
+- `fee`: observable context or past-only derived signal
+- `balance_before`: observable context or past-only derived signal
+- `balance_after`: observable context or past-only derived signal
+- `depletion_ratio`: observable context or past-only derived signal
+- `balance_change_ratio`: observable context or past-only derived signal
+- `behavioral_history_count`: observable context or past-only derived signal
+- `user_mean_amount`: observable context or past-only derived signal
+- `user_median_amount`: observable context or past-only derived signal
+- `user_std_amount`: observable context or past-only derived signal
+- `amount_vs_user_mean`: observable context or past-only derived signal
+- `amount_vs_user_median`: observable context or past-only derived signal
+- `amount_zscore_user`: observable context or past-only derived signal
+- `amount_percentile_user`: observable context or past-only derived signal
+- `time_since_previous_tx_seconds`: observable context or past-only derived signal
+- `behavioral_model_active`: observable context or past-only derived signal
+- `tx_count_5m`: observable context or past-only derived signal
+- `amount_sum_5m`: observable context or past-only derived signal
+- `tx_count_15m`: observable context or past-only derived signal
+- `amount_sum_15m`: observable context or past-only derived signal
+- `tx_count_1h`: observable context or past-only derived signal
+- `amount_sum_1h`: observable context or past-only derived signal
+- `avg_amount_1h`: observable context or past-only derived signal
+- `tx_count_6h`: observable context or past-only derived signal
+- `amount_sum_6h`: observable context or past-only derived signal
+- `tx_count_24h`: observable context or past-only derived signal
+- `amount_sum_24h`: observable context or past-only derived signal
+- `avg_amount_24h`: observable context or past-only derived signal
+- `max_amount_24h`: observable context or past-only derived signal
+- `user_max_amount_30d`: observable context or past-only derived signal
+- `user_mean_daily_tx_count`: observable context or past-only derived signal
+- `user_mean_hourly_tx_count`: observable context or past-only derived signal
+- `device_is_new`: observable context or past-only derived signal
+- `device_age_days`: observable context or past-only derived signal
+- `device_first_seen`: observable context or past-only derived signal
+- `shared_device_user_count`: observable context or past-only derived signal
+- `user_device_count`: observable context or past-only derived signal
+- `device_transaction_count_24h`: observable context or past-only derived signal
+- `device_transaction_count_7d`: observable context or past-only derived signal
+- `channel_changed_recently`: observable context or past-only derived signal
+- `preferred_channel_mismatch`: observable context or past-only derived signal
+- `first_time_recipient`: observable context or past-only derived signal
+- `recipient_frequency_user`: observable context or past-only derived signal
+- `user_receiver_tx_count_7d`: observable context or past-only derived signal
+- `user_receiver_tx_count_30d`: observable context or past-only derived signal
+- `time_since_last_recipient_tx`: observable context or past-only derived signal
+- `receiver_transaction_count_24h`: observable context or past-only derived signal
+- `receiver_unique_senders_24h`: observable context or past-only derived signal
+- `receiver_transaction_count_7d`: observable context or past-only derived signal
+- `receiver_unique_senders_7d`: observable context or past-only derived signal
+- `recent_inflow_amount_1h`: observable context or past-only derived signal
+- `recent_outflow_amount_1h`: observable context or past-only derived signal
+- `receiver_inflow_1h`: observable context or past-only derived signal
+- `receiver_outflow_1h`: observable context or past-only derived signal
+- `recent_inflow_amount_24h`: observable context or past-only derived signal
+- `recent_outflow_amount_24h`: observable context or past-only derived signal
+- `receiver_inflow_24h`: observable context or past-only derived signal
+- `receiver_outflow_24h`: observable context or past-only derived signal
+- `turnaround_latency_seconds`: observable context or past-only derived signal
+- `rapid_fund_turnaround`: observable context or past-only derived signal
+- `receiver_turnaround_ratio`: observable context or past-only derived signal
+- `receiver_sender_diversity`: observable context or past-only derived signal
+- `sender_in_degree`: observable context or past-only derived signal
+- `sender_out_degree`: observable context or past-only derived signal
+- `receiver_in_degree`: observable context or past-only derived signal
+- `receiver_out_degree`: observable context or past-only derived signal
+- `unique_sender_count`: observable context or past-only derived signal
+- `unique_receiver_count`: observable context or past-only derived signal
+- `connected_component_size`: observable context or past-only derived signal
+- `reciprocal_transfer_ratio`: observable context or past-only derived signal
+- `shared_recipient_count`: observable context or past-only derived signal
+- `fund_concentration`: observable context or past-only derived signal
+- `rapid_forwarding_ratio`: observable context or past-only derived signal
+- `shared_device_count`: observable context or past-only derived signal
+- `mule_network_score`: observable context or past-only derived signal
+- `recipient_risk_score`: observable context or past-only derived signal
+- `device_risk_score`: observable context or past-only derived signal
+- `previous_latitude`: observable context or past-only derived signal
+- `previous_longitude`: observable context or past-only derived signal
+- `distance_from_previous_tx_km`: observable context or past-only derived signal
+- `time_since_previous_location_seconds`: observable context or past-only derived signal
+- `distance_from_home_km`: observable context or past-only derived signal
+- `impossible_travel_speed`: observable context or past-only derived signal
+- `impossible_travel`: observable context or past-only derived signal
+- `transaction_hour`: observable context or past-only derived signal
+- `day_of_week`: observable context or past-only derived signal
+- `weekend_flag`: observable context or past-only derived signal
+- `is_night_transaction`: observable context or past-only derived signal
+- `unusual_hour_score`: observable context or past-only derived signal
+- `unusual_channel_score`: observable context or past-only derived signal
+- `unusual_location_score`: observable context or past-only derived signal
+- `unusual_transaction_type_score`: observable context or past-only derived signal
+- `user_behavior_score`: observable context or past-only derived signal
+- `pin_reset_then_transfer`: observable context or past-only derived signal
+- `new_device_then_transfer`: observable context or past-only derived signal
+- `failed_pin_then_success`: observable context or past-only derived signal
+- `balance_inquiry_then_cashout`: observable context or past-only derived signal
+- `incoming_then_rapid_outgoing`: observable context or past-only derived signal
+- `new_recipient_then_large_transfer`: observable context or past-only derived signal
+- `multiple_otp_then_transfer`: observable context or past-only derived signal
+- `device_change_then_high_value`: observable context or past-only derived signal
+- `sim_change_then_transfer`: observable context or past-only derived signal
+- `credential_change_then_cashout`: observable context or past-only derived signal
+- `channel_hop_sequence`: observable context or past-only derived signal
+- `sequence_risk_score`: observable context or past-only derived signal
+- `agent_transaction_count_1h`: observable context or past-only derived signal
+- `agent_cashout_amount_1h`: observable context or past-only derived signal
+- `agent_transaction_count_24h`: observable context or past-only derived signal
+- `agent_cashout_amount_24h`: observable context or past-only derived signal
+- `agent_risk_score`: observable context or past-only derived signal
+- `rule_risk_score`: observable context or past-only derived signal
+- `triggered_rule_count`: observable context or past-only derived signal
+- `highest_rule_severity`: observable context or past-only derived signal
