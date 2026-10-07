@@ -1,0 +1,482 @@
+[
+  {
+    "dataset": "100k",
+    "model": "LogisticRegression",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "100k",
+    "model": "RandomForest",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 2.0816681711721685e-17
+  },
+  {
+    "dataset": "100k",
+    "model": "HistGradientBoosting",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "100k",
+    "model": "XGBoost",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "100k",
+    "model": "LightGBM",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "100k",
+    "model": "RulesOnly",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "100k",
+    "model": "IsolationForest",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "100k",
+    "model": "Hybrid_RulesSupervised",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "100k",
+    "model": "Hybrid_AddAnomaly",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "100k",
+    "model": "Hybrid_AddDeviceRecipient",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "100k",
+    "model": "FullHybrid",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "100k",
+    "model": "Hybrid_WithoutAnomaly",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 1.1102230246251565e-16
+  },
+  {
+    "dataset": "100k",
+    "model": "Hybrid_WithoutGraph",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "100k",
+    "model": "Hybrid_WithoutSequence",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 5.551115123125783e-17
+  },
+  {
+    "dataset": "100k",
+    "model": "WithoutGraphFeatures",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "100k",
+    "model": "WithoutSequenceFeatures",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "200k",
+    "model": "LogisticRegression",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "200k",
+    "model": "RandomForest",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 2.0816681711721685e-17
+  },
+  {
+    "dataset": "200k",
+    "model": "HistGradientBoosting",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "200k",
+    "model": "XGBoost",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "200k",
+    "model": "LightGBM",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "200k",
+    "model": "RulesOnly",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 5.4737740867727425e-09
+  },
+  {
+    "dataset": "200k",
+    "model": "IsolationForest",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "200k",
+    "model": "Hybrid_RulesSupervised",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "200k",
+    "model": "Hybrid_AddAnomaly",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "200k",
+    "model": "Hybrid_AddDeviceRecipient",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "200k",
+    "model": "FullHybrid",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 6.938893903907228e-18
+  },
+  {
+    "dataset": "200k",
+    "model": "Hybrid_WithoutAnomaly",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "200k",
+    "model": "Hybrid_WithoutGraph",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "200k",
+    "model": "Hybrid_WithoutSequence",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "200k",
+    "model": "WithoutGraphFeatures",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "200k",
+    "model": "WithoutSequenceFeatures",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "300k",
+    "model": "LogisticRegression",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "300k",
+    "model": "RandomForest",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 1.1102230246251565e-16
+  },
+  {
+    "dataset": "300k",
+    "model": "HistGradientBoosting",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "300k",
+    "model": "XGBoost",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "300k",
+    "model": "LightGBM",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "300k",
+    "model": "RulesOnly",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "300k",
+    "model": "IsolationForest",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "300k",
+    "model": "Hybrid_RulesSupervised",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "300k",
+    "model": "Hybrid_AddAnomaly",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "300k",
+    "model": "Hybrid_AddDeviceRecipient",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "300k",
+    "model": "FullHybrid",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 6.938893903907228e-18
+  },
+  {
+    "dataset": "300k",
+    "model": "Hybrid_WithoutAnomaly",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "300k",
+    "model": "Hybrid_WithoutGraph",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "300k",
+    "model": "Hybrid_WithoutSequence",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "300k",
+    "model": "WithoutGraphFeatures",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "300k",
+    "model": "WithoutSequenceFeatures",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "400k",
+    "model": "LogisticRegression",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 1.4901161193847656e-08
+  },
+  {
+    "dataset": "400k",
+    "model": "RandomForest",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 1.3877787807814457e-17
+  },
+  {
+    "dataset": "400k",
+    "model": "HistGradientBoosting",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "400k",
+    "model": "XGBoost",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "400k",
+    "model": "LightGBM",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "400k",
+    "model": "RulesOnly",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "400k",
+    "model": "IsolationForest",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "400k",
+    "model": "Hybrid_RulesSupervised",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "400k",
+    "model": "Hybrid_AddAnomaly",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "400k",
+    "model": "Hybrid_AddDeviceRecipient",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "400k",
+    "model": "FullHybrid",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "400k",
+    "model": "Hybrid_WithoutAnomaly",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 8.673617379884035e-18
+  },
+  {
+    "dataset": "400k",
+    "model": "Hybrid_WithoutGraph",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "400k",
+    "model": "Hybrid_WithoutSequence",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "400k",
+    "model": "WithoutGraphFeatures",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "400k",
+    "model": "WithoutSequenceFeatures",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "500k",
+    "model": "LogisticRegression",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "500k",
+    "model": "RandomForest",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 1.214306433183765e-17
+  },
+  {
+    "dataset": "500k",
+    "model": "HistGradientBoosting",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "500k",
+    "model": "XGBoost",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "500k",
+    "model": "LightGBM",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "500k",
+    "model": "RulesOnly",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "500k",
+    "model": "IsolationForest",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "500k",
+    "model": "Hybrid_RulesSupervised",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "500k",
+    "model": "Hybrid_AddAnomaly",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "500k",
+    "model": "Hybrid_AddDeviceRecipient",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "500k",
+    "model": "FullHybrid",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "500k",
+    "model": "Hybrid_WithoutAnomaly",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "500k",
+    "model": "Hybrid_WithoutGraph",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "500k",
+    "model": "Hybrid_WithoutSequence",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "500k",
+    "model": "WithoutGraphFeatures",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  },
+  {
+    "dataset": "500k",
+    "model": "WithoutSequenceFeatures",
+    "prediction_reload": "PASSED",
+    "max_probability_difference": 0.0
+  }
+]

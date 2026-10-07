@@ -1,0 +1,9 @@
+{
+  "status": "PASSED",
+  "rows": 100000,
+  "seed": 42,
+  "exact_frame_match": true,
+  "rtol": 1e-06,
+  "atol": 1e-06,
+  "note": "100k bootstrap regenerated under pinned final environment"
+}

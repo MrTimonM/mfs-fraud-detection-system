@@ -1,0 +1,5 @@
+{
+  "model": "XGBoost",
+  "selection": "seeded random 256 held-out transactions for global SHAP; highest-risk 12 for local explanations",
+  "limitation": "Finite sampled model attributions, not causal or calibrated hybrid explanations."
+}

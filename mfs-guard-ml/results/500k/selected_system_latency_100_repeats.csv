@@ -1,0 +1,2 @@
+batch_size,mean_ms,median_ms,p50_ms,p95_ms,p99_ms,transactions_per_second,repeats,scope,model
+1,19.06180499995571,17.94975000029808,17.94975000029808,23.69429999980639,28.171761000030624,52.46092906743739,100,single-process local prepared-frame preprocessing + models + calibration; excludes historical state lookup,Hybrid_AddAnomaly
