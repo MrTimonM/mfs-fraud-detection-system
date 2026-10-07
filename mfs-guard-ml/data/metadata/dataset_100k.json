@@ -1,0 +1,43 @@
+{
+  "rows": 100000,
+  "users": 1250,
+  "receivers": 1250,
+  "devices": 1666,
+  "agents": 83,
+  "merchants": 125,
+  "date_range": [
+    "2026-01-01 01:40:55.031327281+00:00",
+    "2026-05-02 11:52:57.748272158+00:00"
+  ],
+  "columns": 154,
+  "fraud_prevalence": 0.04969,
+  "fraud_types": {
+    "LEGITIMATE": 95031,
+    "ACCOUNT_TAKEOVER": 871,
+    "SUBTLE_FRAUD": 837,
+    "MULE_ACTIVITY": 624,
+    "VELOCITY_FRAUD": 561,
+    "SOCIAL_ENGINEERING": 555,
+    "DEVICE_FRAUD": 495,
+    "CASH_OUT_ABUSE": 387,
+    "SIM_SWAP_PATTERN": 345,
+    "AGENT_FRAUD": 294
+  },
+  "transaction_types": {
+    "SEND_MONEY": 29977,
+    "CASH_IN": 19537,
+    "CASH_OUT": 17412,
+    "MERCHANT_PAYMENT": 9782,
+    "MOBILE_RECHARGE": 7641,
+    "BILL_PAYMENT": 5737,
+    "BANK_TRANSFER": 5644,
+    "REMITTANCE": 4270
+  },
+  "channels": {
+    "APP": 42864,
+    "AGENT": 30297,
+    "USSD": 19155,
+    "API": 3849,
+    "WEB": 3835
+  }
+}
