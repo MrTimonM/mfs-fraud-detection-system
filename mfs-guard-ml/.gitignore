@@ -1,0 +1,11 @@
+.venv/
+.wheels/
+__pycache__/
+.pytest_cache/
+data/raw/
+data/processed/
+logs/
+results/*/test_predictions*
+results/*/hybrid_predictions.csv
+data/metadata/profiles_*.csv
+data/metadata/profiles_*.parquet

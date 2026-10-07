@@ -1,0 +1,7 @@
+{
+  "threshold": 0.005,
+  "calibration": "isotonic",
+  "kind": "rules",
+  "feature_columns": null,
+  "meta_columns": null
+}

@@ -1,0 +1,23 @@
+{
+  "training_time_seconds": 0.00843200000053912,
+  "peak_memory_mb": 424.515625,
+  "dependencies": [
+    "LightGBM",
+    "IsolationForest"
+  ],
+  "base_training_time_excluded": true,
+  "threshold": 0.01549381707027114,
+  "calibration": "identity",
+  "kind": "fusion",
+  "feature_columns": null,
+  "meta_columns": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ]
+}

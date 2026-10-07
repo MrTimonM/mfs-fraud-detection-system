@@ -9,3 +9,6 @@ playwright-report/
 .data/
 
 .vercel
+
+# Keep generated transaction datasets local.
+/mfs_synthetic_*.csv
